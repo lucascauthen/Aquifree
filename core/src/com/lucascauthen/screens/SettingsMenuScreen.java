@@ -19,6 +19,11 @@ public class SettingsMenuScreen extends GameScreen {
     }
 
     @Override
+    public void update(float delta) {
+
+    }
+
+    @Override
     public void resume() {
 
     }

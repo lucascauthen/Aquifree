@@ -14,6 +14,11 @@ public class LevelStatMenuScreen extends GameScreen {
     }
 
     @Override
+    public void update(float delta) {
+
+    }
+
+    @Override
     public void pause() {
 
     }
