@@ -49,7 +49,6 @@ public class MainMenuScreen extends GameScreen {
         backgroundImage = new Image(backgroundTexture);
         //Add background image to background group
         background.addActor(backgroundImage);
-        backgroundImage.setPosition(Gdx.graphics.getWidth()/2 - backgroundImage.getWidth()/2, Gdx.graphics.getHeight()/2 - backgroundImage.getHeight()/2);
 
         font = new BitmapFont();
         skin = new Skin();
@@ -70,7 +69,12 @@ public class MainMenuScreen extends GameScreen {
             }
         });
 
-
+        stage.addAction(Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                backgroundImage.setPosition(Gdx.graphics.getWidth()/2 - backgroundImage.getWidth()/2, Gdx.graphics.getHeight()/2 - backgroundImage.getHeight()/2);
+            }
+        }));
     }
     @Override
     public void render(float delta) {
