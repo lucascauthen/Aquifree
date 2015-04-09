@@ -1,6 +1,7 @@
 package com.lucascauthen.screens;
 
 import com.badlogic.gdx.Screen;
+import com.lucascauthen.screens.transitions.TransitionScreen;
 import com.lucascauthen.util.AssetLoader;
 
 /**
@@ -35,9 +36,18 @@ public abstract class GameScreen implements Screen{
     public abstract void hide();
 
     @Override
-    public  void dispose() {
+    public  abstract void dispose();
 
-        //Tells the manager that this screen is no longer in context
+    public void addScreenForwards(GameScreen s, GameScreen beforeTransition, GameScreen afterTransition) {
+        this.parent.newScreen(s);
+        this.parent.newScreen(afterTransition);
+        this.parent.newScreen(beforeTransition);
+    }
+    public void addScreenForwards(GameScreen s) {
+        //this.addScreenForwards(s, new FadeTransition(), new FadeTransition());
+    }
+    public void addScreenBackwards() {
+        this.dispose();
         this.parent.popCurScreen();
     }
 }

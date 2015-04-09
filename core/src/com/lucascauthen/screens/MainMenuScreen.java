@@ -8,16 +8,21 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import javax.swing.event.ChangeEvent;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
 
 /**
  * Created by Administrator on 4/7/2015.
  */
 public class MainMenuScreen extends GameScreen {
     Stage stage;
+    TextButton playButton;
+    TextButton aboutButton;
+    TextButton settingsButton;
     TextButton button;
     TextButtonStyle textButtonStyle;
     BitmapFont font;
@@ -36,29 +41,30 @@ public class MainMenuScreen extends GameScreen {
         textButtonStyle.font = font;
         textButtonStyle.up = skin.getDrawable("up-button");
         textButtonStyle.down = skin.getDrawable("down-button");
-
         textButtonStyle.checked = skin.getDrawable("check-button");
         button = new TextButton("Button1", textButtonStyle);
         stage.addActor(button);
-        button.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                parent.newScreen(new AboutMenuScreen(parent));
 
+        button.addListener(new DragListener() {
+            @Override
+            public void touchDragged(InputEvent event, float x, float y, int pointer) {
+                button.moveBy(x - button.getWidth() / 2, y - button.getHeight() / 2);
             }
         });
+
     }
     @Override
     public void render(float delta) {
-        // Sets a Color to Fill the Screen with (RGB = 10, 15, 230), Opacity of 1 (100%)
         Gdx.gl.glClearColor(10/255.0f, 15/255.0f, 230/255.0f, 1f);
         // Fills the screen with the selected color
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.draw();
+
     }
 
     @Override
     public void pause() {
-        stage.dispose();
+
 
     }
 
@@ -79,6 +85,9 @@ public class MainMenuScreen extends GameScreen {
 
     @Override
     public void dispose() {
-
+        stage.dispose();
+        font.dispose();
+        skin.dispose();
+        super.dispose();
     }
 }

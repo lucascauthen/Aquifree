@@ -29,6 +29,7 @@ public class ScreenManager implements ScreenChangeListener{
 
     @Override
     public void popCurScreen() {
+
         screens.pop();
     }
     public void render(float delta) {
