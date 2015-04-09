@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -19,7 +20,6 @@ import com.badlogic.gdx.scenes.scene2d.utils.DragListener;
  * Created by Administrator on 4/7/2015.
  */
 public class MainMenuScreen extends GameScreen {
-    Stage stage;
     TextButton playButton;
     TextButton aboutButton;
     TextButton settingsButton;
@@ -45,10 +45,10 @@ public class MainMenuScreen extends GameScreen {
         button = new TextButton("Button1", textButtonStyle);
         stage.addActor(button);
 
-        button.addListener(new DragListener() {
+        button.addListener(new ClickListener() {
             @Override
-            public void touchDragged(InputEvent event, float x, float y, int pointer) {
-                button.moveBy(x - button.getWidth() / 2, y - button.getHeight() / 2);
+            public void clicked(InputEvent event, float x, float y) {
+                fadeToNewScreen(new LevelSelectScreen(parent), 1);
             }
         });
 
@@ -59,17 +59,16 @@ public class MainMenuScreen extends GameScreen {
         // Fills the screen with the selected color
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
-
+        stage.act(delta);
     }
-
+    public void resume() {
+        stage.addAction(Actions.alpha(0));
+        stage.addAction(Actions.fadeIn(1));
+        Gdx.input.setInputProcessor(stage);
+    }
     @Override
     public void pause() {
 
-
-    }
-
-    @Override
-    public void resume() {
 
     }
 
@@ -88,6 +87,5 @@ public class MainMenuScreen extends GameScreen {
         stage.dispose();
         font.dispose();
         skin.dispose();
-        super.dispose();
     }
 }

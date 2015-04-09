@@ -2,6 +2,8 @@ package com.lucascauthen.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 
 /**
  * Created by Administrator on 4/7/2015.
@@ -9,6 +11,9 @@ import com.badlogic.gdx.graphics.GL20;
 public class AboutMenuScreen extends GameScreen {
     public AboutMenuScreen(ScreenChangeListener parent) {
         super(parent);
+        stage = new Stage();
+        stage.addAction(Actions.alpha(0));
+        stage.addAction(Actions.fadeIn(1));
     }
 
     @Override
@@ -26,11 +31,6 @@ public class AboutMenuScreen extends GameScreen {
 
     @Override
     public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
 
     }
 

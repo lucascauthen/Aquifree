@@ -29,8 +29,8 @@ public class ScreenManager implements ScreenChangeListener{
 
     @Override
     public void popCurScreen() {
-
         screens.pop();
+        this.curScreen().resume();
     }
     public void render(float delta) {
         this.curScreen().render(delta);
