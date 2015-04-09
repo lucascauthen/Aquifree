@@ -8,14 +8,17 @@ import java.util.Stack;
 
 
 public class ScreenManager implements ScreenChangeListener{
-    private Stack<Screen> screens;
+    private Stack<GameScreen> screens;
     private AssetLoader loader;
     public ScreenManager() {
-        screens = new Stack<Screen>();
+        screens = new Stack<GameScreen>();
     }
     public Screen curScreen() {
         if(screens.empty()) {
+            //Creates both the mainmenu screen and the slpashscreen and renders the splashscreen
             screens.push(new MainMenuScreen(this));
+            GameScreen temp = screens.peek();
+            screens.push(new SplashScreen(this, temp));
         }
         return screens.peek();
     }
