@@ -57,13 +57,19 @@ public abstract class GameScreen implements Screen{
     public void addScreenForwards(GameScreen s) {
         //this.addScreenForwards(s, new FadeTransition(), new FadeTransition());
     }
-    public void fadeToPreviousScreen(float transtionDuration) {
+    public void fadeToPreviousScreen(float transtionDuration, final boolean isFadeIn) {
         stage.addAction(Actions.sequence(Actions.fadeOut(transtionDuration), Actions.run(new Runnable() {
             @Override
             public void run() {
                 dispose();
-                parent.popCurScreen();
+                if(isFadeIn)
+                    parent.popCurScreen();
+                else
+                    parent.popCurScreenWithoutFade();
             }
         })));
+    }
+    public void fadeToPreviousScreen(float transtionDuration) {
+        fadeToPreviousScreen(transtionDuration, true);
     }
 }

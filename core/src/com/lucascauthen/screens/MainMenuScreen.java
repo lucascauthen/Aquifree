@@ -50,6 +50,7 @@ public class MainMenuScreen extends GameScreen {
         //Add background image to background group
         background.addActor(backgroundImage);
 
+        //Button stuff to change later
         font = new BitmapFont();
         skin = new Skin();
         buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons.atlas"));
@@ -59,9 +60,10 @@ public class MainMenuScreen extends GameScreen {
         textButtonStyle.up = skin.getDrawable("up-button");
         textButtonStyle.down = skin.getDrawable("down-button");
         textButtonStyle.checked = skin.getDrawable("check-button");
-        button = new TextButton("Button1", textButtonStyle);
-        foreGround.addActor(button);
+        button = new TextButton("Start", textButtonStyle);
 
+        foreGround.addActor(button);
+        background.setVisible(false);
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
@@ -69,12 +71,14 @@ public class MainMenuScreen extends GameScreen {
             }
         });
 
-        stage.addAction(Actions.run(new Runnable() {
+        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.delay(2), Actions.run(new Runnable() {
             @Override
             public void run() {
                 backgroundImage.setPosition(Gdx.graphics.getWidth()/2 - backgroundImage.getWidth()/2, Gdx.graphics.getHeight()/2 - backgroundImage.getHeight()/2);
+                background.setVisible(true);
             }
-        }));
+        }), Actions.fadeIn(1)));
+
     }
     @Override
     public void render(float delta) {

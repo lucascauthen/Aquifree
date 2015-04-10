@@ -6,4 +6,5 @@ package com.lucascauthen.screens;
 public interface ScreenChangeListener {
     void newScreen(GameScreen s);
     void popCurScreen();
+    void popCurScreenWithoutFade();
 }

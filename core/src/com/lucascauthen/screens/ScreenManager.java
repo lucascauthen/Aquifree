@@ -35,6 +35,9 @@ public class ScreenManager implements ScreenChangeListener{
         screens.pop();
         this.curScreen().resume();
     }
+    public void popCurScreenWithoutFade() {
+        screens.pop();
+    }
     public void render(float delta) {
         this.curScreen().render(delta);
     }
