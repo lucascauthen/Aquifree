@@ -6,8 +6,10 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+
 
 
 /**
@@ -15,16 +17,18 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
  */
 public class SplashScreen extends GameScreen {
     private GameScreen background;
-    private TextField titleText;
+    FreeTypeFontGenerator
     private BitmapFont titleFont;
-    private Skin titleSkin;
+    private Label.LabelStyle titleSkin;
     public SplashScreen(ScreenChangeListener parent, GameScreen background) {
         super(parent);
         this.background = background;
         this.stage = new Stage();
-        this.titleSkin = new Skin(Gdx.files.internal("uiskin.json"));
+        this.titleSkin = new Label.LabelStyle();
         this.titleFont = new BitmapFont();
-        titleText = new TextField("Aguifree Lite", titleSkin);
+
+        titleSkin.font = titleFont;
+        titleText = new Label();
         create();
         ///This is intentional!!! I move the textfield off screen because if you don't, it will draw before the alpha is set and the text fill flash on the screen
         titleText.setPosition(Gdx.graphics.getWidth() * 2 - titleText.getWidth()/2, Gdx.graphics.getHeight()/2 - titleText.getHeight()/2);
