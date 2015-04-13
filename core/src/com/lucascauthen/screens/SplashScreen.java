@@ -17,7 +17,6 @@ import com.badlogic.gdx.scenes.scene2d.ui.TextField;
  */
 public class SplashScreen extends GameScreen {
     private GameScreen background;
-    FreeTypeFontGenerator
     private BitmapFont titleFont;
     private Label.LabelStyle titleSkin;
     public SplashScreen(ScreenChangeListener parent, GameScreen background) {

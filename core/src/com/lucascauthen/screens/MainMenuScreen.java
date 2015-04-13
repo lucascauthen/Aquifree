@@ -114,5 +114,7 @@ public class MainMenuScreen extends GameScreen {
         stage.dispose();
         font.dispose();
         skin.dispose();
+        buttonAtlas.dispose();
+        backgroundTexture.dispose();
     }
 }
