@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.lucascauthen.screens.ScreenManager;
+import com.lucascauthen.util.AssetLoader;
 
 
 public class AquifreeGame extends ApplicationAdapter {
@@ -20,4 +21,9 @@ public class AquifreeGame extends ApplicationAdapter {
 	public void render () {
         screenManager.render(Gdx.graphics.getDeltaTime());
 	}
+
+    @Override
+    public void dispose() {
+        AssetLoader.disposeAll();
+    }
 }
