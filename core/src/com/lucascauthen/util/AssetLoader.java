@@ -13,15 +13,25 @@ import java.util.ArrayList;
  * Created by Administrator on 4/7/2015.
  */
 public class AssetLoader {
-    private static ArrayList<Asset> assetList;
-    private static int curId;
-    private static int nextId(){
+    private ArrayList<Asset> assetList = new ArrayList<Asset>();
+    private static AssetLoader assetLoader;
+    private AssetLoader() {
+        this.assetList = new ArrayList<Asset>();
+    }
+    public static AssetLoader getInstance() {
+        if(assetLoader == null) {
+            assetLoader = new AssetLoader();
+        }
+        return assetLoader;
+    }
+    private int curId;
+    private int nextId(){
         return ++curId;
     }
-    public static Disposable getAsset(String name, AssetType type) {
+    public Disposable getAsset(String name, AssetType type) {
         FileHandle file = Gdx.files.internal(name);
         if(file.exists()) {
-            for(Asset asset: assetList) {
+            for(Asset asset: this.assetList) {
                 if(asset.getName().equals(name)) {
                     return asset.getItem();
                 }
@@ -33,7 +43,7 @@ public class AssetLoader {
         Gdx.app.log("Assets", "File with name: " + name + " was requested but does not exist.");
         return null;
     }
-    private static Disposable loadAsset(String name, AssetType type) {
+    private Disposable loadAsset(String name, AssetType type) {
         switch(type) {
             case TEXTURE:
                 assetList.add(new Asset(new Texture(Gdx.files.internal(name)), name, nextId(), type));
@@ -49,18 +59,18 @@ public class AssetLoader {
                 return null;
         }
     }
-    private static Disposable getLatestItem() {
+    private Disposable getLatestItem() {
         return assetList.get(assetList.size() - 1).getItem();
     }
-    public static void dispose(String name) {
+    public void dispose(String name) {
 
     }
-    public static void disposeAll() {
+    public void disposeAll() {
         for(Asset asset: assetList) {
             asset.getItem().dispose();
         }
     }
-    public static enum AssetType {
+    public enum AssetType {
         TEXTURE,
         BITMAPFONT,
         TEXTURE_ATLAS

@@ -11,71 +11,89 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.lucascauthen.screens.MenuItems.MenuButton;
+import com.lucascauthen.util.AssetLoader;
 
 /**
  * Created by Administrator on 4/7/2015.
  */
 public class MainMenuScreen extends GameScreen {
-    TextButton playButton;
-    TextButton aboutButton;
-    TextButton settingsButton;
-    TextButton button;
+    MenuButton playButton;
+    MenuButton aboutButton;
+    MenuButton settingsButton;
     TextButtonStyle textButtonStyle;
-    BitmapFont font;
+    BitmapFont buttonFont;
     Skin skin;
     TextureAtlas buttonAtlas;
     Group background;
     Image backgroundImage;
     Texture backgroundTexture;
+    Table menuContents;
 
     Group foreGround;
     public MainMenuScreen(final ScreenChangeListener parent) {
         super(parent);
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
+
+        //Background stuff
         background = new Group();
         background.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        backgroundTexture = (Texture)AssetLoader.getInstance().getAsset("Backgrounds/MainMenu.png", AssetLoader.AssetType.TEXTURE);
+        backgroundImage = new Image(backgroundTexture);
+        background.addActor(backgroundImage);
 
+        //Foreground stuff
         foreGround = new Group();
         foreGround.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
+        //Foreground button style/font
+
+
+        //Foreground buttons
+        playButton = new MenuButton("Play");
+        aboutButton = new MenuButton("About");
+        settingsButton = new MenuButton("Settings");
+        menuContents = new Table();
+
+        menuContents.add(playButton.get()).expandX().center().row();
+        menuContents.row();
+        menuContents.add(aboutButton.get()).expandX().center().row();
+        menuContents.row();
+        menuContents.add(settingsButton.get()).expandX().center().row();
+        menuContents.setFillParent(true);
+        //foreGround.addActor(menuContents);
         stage.addActor(background);
         stage.addActor(foreGround);
 
-        backgroundTexture = new Texture("BackGrounds/MainMenu.png");
-        backgroundImage = new Image(backgroundTexture);
-        //Add background image to background group
-        background.addActor(backgroundImage);
+
 
         //Button stuff to change later
-        font = new BitmapFont();
-        skin = new Skin();
-        buttonAtlas = new TextureAtlas(Gdx.files.internal("buttons.atlas"));
-        skin.addRegions(buttonAtlas);
-        textButtonStyle = new TextButtonStyle();
-        textButtonStyle.font = font;
-        textButtonStyle.up = skin.getDrawable("up-button");
-        textButtonStyle.down = skin.getDrawable("down-button");
-        textButtonStyle.checked = skin.getDrawable("check-button");
-        button = new TextButton("Start", textButtonStyle);
 
-        foreGround.addActor(button);
+        //These have to start as invisible because otherwise they will flash on the screen before their alpha is set
         background.setVisible(false);
-        button.addListener(new ClickListener() {
+        foreGround.setVisible(false);
+
+        //Listeners
+        stage.addListener(new ClickListener() {
             @Override
-            public void clicked(InputEvent event, float x, float y) {
+            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
                 fadeToNewScreen(new LevelSelectScreen(parent), 1);
             }
         });
 
+        //Fade in action
         stage.addAction(Actions.sequence(Actions.alpha(0), Actions.delay(2), Actions.run(new Runnable() {
             @Override
             public void run() {
                 backgroundImage.setPosition(Gdx.graphics.getWidth()/2 - backgroundImage.getWidth()/2, Gdx.graphics.getHeight()/2 - backgroundImage.getHeight()/2);
                 background.setVisible(true);
+                foreGround.setVisible(true);
+                Gdx.input.setInputProcessor(stage);
             }
         }), Actions.fadeIn(1)));
 
@@ -88,9 +106,15 @@ public class MainMenuScreen extends GameScreen {
         stage.draw();
         stage.act(delta);
     }
+    @Override
     public void resume() {
         stage.addAction(Actions.alpha(0));
         stage.addAction(Actions.fadeIn(1));
+        Gdx.input.setInputProcessor(stage);
+    }
+    @Override
+    public void resumeWithoutFade() {
+        stage.addAction(Actions.alpha(1));
         Gdx.input.setInputProcessor(stage);
     }
     @Override
@@ -112,9 +136,5 @@ public class MainMenuScreen extends GameScreen {
     @Override
     public void dispose() {
         stage.dispose();
-        font.dispose();
-        skin.dispose();
-        buttonAtlas.dispose();
-        backgroundTexture.dispose();
     }
 }

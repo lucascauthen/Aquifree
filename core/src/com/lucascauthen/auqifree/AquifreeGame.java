@@ -24,6 +24,6 @@ public class AquifreeGame extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-        AssetLoader.disposeAll();
+        AssetLoader.getInstance().disposeAll();
     }
 }

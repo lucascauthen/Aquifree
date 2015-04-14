@@ -27,17 +27,17 @@ public class SplashScreen extends GameScreen {
         this.titleFont = new BitmapFont();
 
         titleSkin.font = titleFont;
-        titleText = new Label();
+        //titleText = new Label();
         create();
         ///This is intentional!!! I move the textfield off screen because if you don't, it will draw before the alpha is set and the text fill flash on the screen
-        titleText.setPosition(Gdx.graphics.getWidth() * 2 - titleText.getWidth()/2, Gdx.graphics.getHeight()/2 - titleText.getHeight()/2);
-        this.stage.addActor(titleText);
+        //titleText.setPosition(Gdx.graphics.getWidth() * 2 - titleText.getWidth()/2, Gdx.graphics.getHeight()/2 - titleText.getHeight()/2);
+        //this.stage.addActor(titleText);
     }
     public void create() {
         this.stage.addAction(Actions.sequence(Actions.alpha(0), Actions.run(new Runnable() {
             @Override
             public void run() {
-                titleText.setPosition(Gdx.graphics.getWidth() / 2 - titleText.getWidth()/2, Gdx.graphics.getHeight()/2 - titleText.getHeight()/2);
+                //titleText.setPosition(Gdx.graphics.getWidth() / 2 - titleText.getWidth()/2, Gdx.graphics.getHeight()/2 - titleText.getHeight()/2);
             }
         }), Actions.delay(1), Actions.fadeIn(1), Actions.delay(3), Actions.run(new Runnable() {
             @Override
