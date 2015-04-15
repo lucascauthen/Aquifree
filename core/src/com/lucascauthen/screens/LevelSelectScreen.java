@@ -12,13 +12,12 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class LevelSelectScreen extends GameScreen {
     public LevelSelectScreen(ScreenChangeListener parent) {
         super(parent);
-        stage = new Stage();
         Gdx.input.setInputProcessor(stage);
         stage.addListener(new ClickListener() {
 
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                fadeToPreviousScreen(1);
+                toPreviousScreen(ScreenChangeListener.TransitionType.FADE_IN_OUT, 1);
             }
         });
     }
@@ -39,6 +38,11 @@ public class LevelSelectScreen extends GameScreen {
 
     @Override
     public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
 
     }
 

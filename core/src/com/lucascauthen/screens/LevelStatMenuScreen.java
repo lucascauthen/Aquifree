@@ -24,6 +24,11 @@ public class LevelStatMenuScreen extends GameScreen {
     }
 
     @Override
+    public void resume() {
+
+    }
+
+    @Override
     public void hide() {
 
     }

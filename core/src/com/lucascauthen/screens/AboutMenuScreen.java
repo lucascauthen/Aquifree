@@ -9,6 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
  * Created by Administrator on 4/7/2015.
  */
 public class AboutMenuScreen extends GameScreen {
+    @Override
+    public void resume() {
+
+    }
+
     public AboutMenuScreen(ScreenChangeListener parent) {
         super(parent);
         stage = new Stage();

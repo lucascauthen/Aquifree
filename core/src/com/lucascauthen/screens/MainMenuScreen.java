@@ -12,7 +12,6 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.lucascauthen.screens.MenuItems.MenuButton;
@@ -25,19 +24,17 @@ public class MainMenuScreen extends GameScreen {
     MenuButton playButton;
     MenuButton aboutButton;
     MenuButton settingsButton;
-    TextButtonStyle textButtonStyle;
-    BitmapFont buttonFont;
-    Skin skin;
-    TextureAtlas buttonAtlas;
+
     Group background;
+    Group foreGround;
+
     Image backgroundImage;
     Texture backgroundTexture;
     Table menuContents;
 
-    Group foreGround;
+
     public MainMenuScreen(final ScreenChangeListener parent) {
         super(parent);
-        stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
         //Background stuff
@@ -71,7 +68,6 @@ public class MainMenuScreen extends GameScreen {
         stage.addActor(foreGround);
 
 
-
         //Button stuff to change later
 
         //These have to start as invisible because otherwise they will flash on the screen before their alpha is set
@@ -82,7 +78,7 @@ public class MainMenuScreen extends GameScreen {
         stage.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                fadeToNewScreen(new LevelSelectScreen(parent), 1);
+                parent.newScreen(new LevelSelectScreen(parent), ScreenManager.TransitionType.FADE_IN_OUT, 1.0f);
             }
         });
 
@@ -95,7 +91,7 @@ public class MainMenuScreen extends GameScreen {
                 foreGround.setVisible(true);
                 Gdx.input.setInputProcessor(stage);
             }
-        }), Actions.fadeIn(1)));
+        })));
 
     }
     @Override
@@ -107,20 +103,14 @@ public class MainMenuScreen extends GameScreen {
         stage.act(delta);
     }
     @Override
-    public void resume() {
-        stage.addAction(Actions.alpha(0));
-        stage.addAction(Actions.fadeIn(1));
-        Gdx.input.setInputProcessor(stage);
-    }
-    @Override
-    public void resumeWithoutFade() {
-        stage.addAction(Actions.alpha(1));
-        Gdx.input.setInputProcessor(stage);
-    }
-    @Override
     public void pause() {
 
 
+    }
+
+    @Override
+    public void resume() {
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

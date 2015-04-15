@@ -1,4 +1,5 @@
 package com.lucascauthen.auqifree;
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -13,6 +14,7 @@ public class AquifreeGame extends ApplicationAdapter {
 	private Game game;
 	@Override
 	public void create () {
+        Gdx.app.setLogLevel(Application.LOG_DEBUG);
         this.screenManager = new ScreenManager();
 
 	}

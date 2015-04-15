@@ -5,6 +5,7 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.lucascauthen.screens.Transitions.Transition;
 import com.lucascauthen.util.AssetLoader;
 
 /**
@@ -13,9 +14,18 @@ import com.lucascauthen.util.AssetLoader;
 public abstract class GameScreen implements Screen{
     protected ScreenChangeListener parent;
     protected Stage stage;
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
     public GameScreen(ScreenChangeListener parent) {
         this.parent = parent;
-        //Update please
+        this.stage = new Stage();
     }
     @Override
     public void show() {
@@ -29,16 +39,19 @@ public abstract class GameScreen implements Screen{
     public void resize(int width, int height) {
 
     }
-
+    public void fadeIn(float time) {
+        stage.addAction(Actions.alpha(0));
+        stage.addAction(Actions.fadeIn(time));
+    }
+    public void fadeOut(float time) {
+        stage.addAction(Actions.alpha(1));
+        stage.addAction(Actions.fadeOut(time));
+    }
     @Override
     public abstract void pause();
 
     @Override
-    public void resume() {
-        stage.addAction(Actions.alpha(0));
-        stage.addAction(Actions.fadeIn(1));
-        Gdx.input.setInputProcessor(stage);
-    }
+    public abstract void resume();
 
     @Override
     public abstract void hide();
@@ -46,30 +59,12 @@ public abstract class GameScreen implements Screen{
     @Override
     public  abstract void dispose();
 
-    public void fadeToNewScreen(final GameScreen s, float transtionDuration) {
-        stage.addAction(Actions.sequence(Actions.fadeOut(transtionDuration), Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                parent.newScreen(s);
-            }
-        })));
+
+    public void toPreviousScreen(ScreenManager.TransitionType transitionType, float length) {
+        parent.previousScreen(transitionType, length);
     }
-    public void addScreenForwards(GameScreen s) {
-        //this.addScreenForwards(s, new FadeTransition(), new FadeTransition());
+    public void toNewScreen(GameScreen newScreen, ScreenChangeListener.TransitionType transitionType, float length) {
+        parent.newScreen(newScreen, transitionType, length);
     }
-    public void fadeToPreviousScreen(float transtionDuration, final boolean isFadeIn) {
-        stage.addAction(Actions.sequence(Actions.fadeOut(transtionDuration), Actions.run(new Runnable() {
-            @Override
-            public void run() {
-                dispose();
-                if(isFadeIn)
-                    parent.popCurScreen();
-                else
-                    parent.popCurScreenWithoutFade();
-            }
-        })));
-    }
-    public void fadeToPreviousScreen(float transtionDuration) {
-        fadeToPreviousScreen(transtionDuration, true);
-    }
+
 }
