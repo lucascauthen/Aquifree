@@ -1,18 +1,14 @@
 package com.lucascauthen.screens;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.lucascauthen.screens.Transitions.Transition;
-import com.lucascauthen.util.AssetLoader;
 
 /**
  * Created by Administrator on 4/7/2015.
  */
 public abstract class GameScreen implements Screen{
-    protected ScreenChangeListener parent;
+    protected ScreenChanger parent;
     protected Stage stage;
 
     public Stage getStage() {
@@ -23,7 +19,7 @@ public abstract class GameScreen implements Screen{
         this.stage = stage;
     }
 
-    public GameScreen(ScreenChangeListener parent) {
+    public GameScreen(ScreenChanger parent) {
         this.parent = parent;
         this.stage = new Stage();
     }
@@ -39,14 +35,6 @@ public abstract class GameScreen implements Screen{
     public void resize(int width, int height) {
 
     }
-    public void fadeIn(float time) {
-        stage.addAction(Actions.alpha(0));
-        stage.addAction(Actions.fadeIn(time));
-    }
-    public void fadeOut(float time) {
-        stage.addAction(Actions.alpha(1));
-        stage.addAction(Actions.fadeOut(time));
-    }
     @Override
     public abstract void pause();
 
@@ -60,11 +48,5 @@ public abstract class GameScreen implements Screen{
     public  abstract void dispose();
 
 
-    public void toPreviousScreen(ScreenManager.TransitionType transitionType, float length) {
-        parent.previousScreen(transitionType, length);
-    }
-    public void toNewScreen(GameScreen newScreen, ScreenChangeListener.TransitionType transitionType, float length) {
-        parent.newScreen(newScreen, transitionType, length);
-    }
 
 }

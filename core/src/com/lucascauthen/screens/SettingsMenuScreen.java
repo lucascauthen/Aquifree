@@ -4,7 +4,7 @@ package com.lucascauthen.screens;
  * Created by Administrator on 4/7/2015.
  */
 public class SettingsMenuScreen extends GameScreen {
-    public SettingsMenuScreen(ScreenChangeListener parent) {
+    public SettingsMenuScreen(ScreenChanger parent) {
         super(parent);
     }
 

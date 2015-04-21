@@ -3,16 +3,11 @@ package com.lucascauthen.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton.TextButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.lucascauthen.screens.MenuItems.MenuButton;
 import com.lucascauthen.util.AssetLoader;
@@ -33,7 +28,7 @@ public class MainMenuScreen extends GameScreen {
     Table menuContents;
 
 
-    public MainMenuScreen(final ScreenChangeListener parent) {
+    public MainMenuScreen(final ScreenChanger parent) {
         super(parent);
         Gdx.input.setInputProcessor(stage);
 
@@ -78,7 +73,7 @@ public class MainMenuScreen extends GameScreen {
         stage.addListener(new ClickListener() {
             @Override
             public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                parent.newScreen(new LevelSelectScreen(parent), ScreenManager.TransitionType.FADE_IN_OUT, 1.0f);
+                parent.changeScreen("LevelSelect", ScreenManager.TransitionType.FADE_IN_OUT, 1.0f);
             }
         });
 

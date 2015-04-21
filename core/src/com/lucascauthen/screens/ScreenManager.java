@@ -2,75 +2,72 @@ package com.lucascauthen.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.lucascauthen.screens.Transitions.FadeOutInTransition;
-import com.lucascauthen.screens.Transitions.Transition;
+import com.badlogic.gdx.utils.ArrayMap;
+import com.lucascauthen.screens.Transitions.*;
 import com.lucascauthen.util.AssetLoader;
 
-import java.util.ArrayList;
-import java.util.Stack;
 
-
-public class ScreenManager implements ScreenChangeListener{
-    private Stack<GameScreen> activeScreens;
+public class ScreenManager implements ScreenChanger {
+    private GameScreen activeScreen;
+    private ArrayMap<java.lang.String, GameScreen> screens;
     private AssetLoader loader;
+    public Transition curTransition;
     public ScreenManager() {
-        activeScreens = new Stack<GameScreen>();
+        screens = new ArrayMap<java.lang.String, GameScreen>();
+        screens.put("Splash", new SplashScreen(this));
+        this.activeScreen = screens.firstValue();
+        screens.put("MainMenu", new MainMenuScreen(this));
+        screens.put("LevelSelect", new LevelSelectScreen(this));
+        this.curTransition = new EmptyTransition(null, null, this, 0);
     }
     public GameScreen curScreen() {
-        if(activeScreens.empty()) {
-            //Creates both the mainmenu screen and the slpashscreen and renders the splashscreen
-            activeScreens.push(new MainMenuScreen(this));
-            activeScreens.push(new SplashScreen(this));
-            previousScreen(TransitionType.FADE_IN_OUT, 1.0f);
-            Gdx.app.log("ScreenManager", "Launching splash screen and mainmenu screen.");
+        return activeScreen;
+    }
+    public GameScreen setCurScreen(String screenName) {
+        GameScreen s;
+        if((s = screens.get(screenName)) != null) {
+            activeScreen = s;
+        } else {
+            Gdx.app.log("ScreenManager", "Trying to add a screen that doesn't exist.");
         }
-        return activeScreens.peek();
+
+        return activeScreen;
     }
     public void dispose() {
 
     }
+    public void resume() {
+        Gdx.input.setInputProcessor(this.curScreen().getStage());
+    }
     @Override
-    public void newScreen(GameScreen s, TransitionType transitionType, float length) {
-        Gdx.app.log("ScreenManager", "Adding new screen: " + transitionType);
+    public void changeScreen(String screen, TransitionType transitionType, float length) {
         Stage before = this.curScreen().getStage();
-        this.activeScreens.push(s);
-        Stage after = this.curScreen().getStage();
-        this.activeScreens.push(transitionFactory(transitionType, before, after, length));
-        Gdx.app.log("FadeInOut", "Starting transition.");
+        Stage after = setCurScreen(screen).getStage();
+        this.curTransition = newTransition(transitionType, before, after, length);
     }
 
     @Override
-    public void previousScreen(TransitionType transitionType, float length) {
-        if(activeScreens.size() > 1) {
-            Stage before = this.curScreen().getStage();
-            this.popScreen();
-            Stage after = this.curScreen().getStage();
-            if(!transitionType.equals(TransitionType.NONE))
-                this.activeScreens.push(transitionFactory(transitionType, before, after, length));
-            else
-                Gdx.app.log("ScreenManager", "NONE");
-        } else {
-            Gdx.app.log("ScreenManager", "Cannot transition to previous screen because there is only one screen in the stack.");
-        }
-
+    public void finishedTransition() {
+        resume();
     }
-    public Transition transitionFactory(TransitionType type, Stage before, Stage after, float length) {
+
+    public Transition newTransition(TransitionType type, Stage before, Stage after, float length) {
         Gdx.app.log("ScreenManager", "Creating a new transition object.");
         switch(type) {
             case FADE_IN_OUT:
-                return new FadeOutInTransition(before, after, length, this);
+                return new FadeOutTransition(before, after, this, length);
             case PAN_LEFT:
                 //Add later
             case PAN_RIGHT:
                 //Add later
             default:
-                return new FadeOutInTransition(before, after, 0.5f, this);
+                return new FadeOutTransition(before, after, this, length);
         }
     }
     public void render(float delta) {
-        this.curScreen().render(delta);
-    }
-    public void popScreen() {
-        this.activeScreens.pop();
+        if(this.curTransition.isFinished())
+            this.curScreen().render(delta);
+        else
+            this.curTransition.render(delta);
     }
 }

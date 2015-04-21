@@ -14,7 +14,7 @@ public class AboutMenuScreen extends GameScreen {
 
     }
 
-    public AboutMenuScreen(ScreenChangeListener parent) {
+    public AboutMenuScreen(ScreenChanger parent) {
         super(parent);
         stage = new Stage();
         stage.addAction(Actions.alpha(0));
