@@ -41,6 +41,7 @@ public class ScreenManager implements ScreenChanger {
     }
     @Override
     public void changeScreen(String screen, TransitionType transitionType, float length) {
+        Gdx.input.setInputProcessor(null);
         Stage before = this.curScreen().getStage();
         Stage after = setCurScreen(screen).getStage();
         this.curTransition = newTransition(transitionType, before, after, length);

@@ -78,7 +78,7 @@ public class MainMenuScreen extends GameScreen {
         });
 
         //Fade in action
-        stage.addAction(Actions.sequence(Actions.alpha(0), Actions.delay(2), Actions.run(new Runnable() {
+        stage.addAction(Actions.sequence(Actions.run(new Runnable() {
             @Override
             public void run() {
                 backgroundImage.setPosition(Gdx.graphics.getWidth()/2 - backgroundImage.getWidth()/2, Gdx.graphics.getHeight()/2 - backgroundImage.getHeight()/2);

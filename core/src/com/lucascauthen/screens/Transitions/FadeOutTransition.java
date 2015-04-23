@@ -17,8 +17,8 @@ public class FadeOutTransition extends Transition {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         before.draw();
         after.draw();
-        before.act(delta);
-        after.act(delta);
+        before.act();
+        after.act();
     }
 
     public FadeOutTransition(Stage before, Stage after, ScreenChanger parent, float duration) {
@@ -27,7 +27,7 @@ public class FadeOutTransition extends Transition {
     }
     //This is called to fade out the before screen
     public void primaryTask() {
-        after.addAction(Actions.alpha(1));
+        //after.addAction(Actions.alpha(1));
         before.addAction(Actions.sequence(Actions.alpha(0), Actions.fadeOut(this.duration/2), Actions.run(new Runnable() {
             @Override
             public void run() {
