@@ -72,8 +72,8 @@ public class MainMenuScreen extends GameScreen {
         //Listeners
         stage.addListener(new ClickListener() {
             @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
-                parent.changeScreen("LevelSelect", ScreenManager.TransitionType.FADE_IN_OUT, 1.0f);
+            public void clicked(InputEvent event, float x, float y) {
+                parent.changeScreen("LevelSelect", ScreenChanger.TransitionType.FADE_IN_OUT, 0.5f);
             }
         });
 
@@ -84,7 +84,6 @@ public class MainMenuScreen extends GameScreen {
                 backgroundImage.setPosition(Gdx.graphics.getWidth()/2 - backgroundImage.getWidth()/2, Gdx.graphics.getHeight()/2 - backgroundImage.getHeight()/2);
                 background.setVisible(true);
                 foreGround.setVisible(true);
-                Gdx.input.setInputProcessor(stage);
             }
         })));
 
@@ -105,7 +104,7 @@ public class MainMenuScreen extends GameScreen {
 
     @Override
     public void resume() {
-        Gdx.input.setInputProcessor(stage);
+
     }
 
     @Override

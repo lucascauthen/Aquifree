@@ -1,6 +1,7 @@
 package com.lucascauthen.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.lucascauthen.screens.Transitions.*;
@@ -12,32 +13,36 @@ public class ScreenManager implements ScreenChanger {
     private ArrayMap<java.lang.String, GameScreen> screens;
     private AssetLoader loader;
     public Transition curTransition;
+    public InputMultiplexer inputManager = new InputMultiplexer();
     public ScreenManager() {
         screens = new ArrayMap<java.lang.String, GameScreen>();
         screens.put("Splash", new SplashScreen(this));
-        this.activeScreen = screens.firstValue();
+        activeScreen = screens.firstValue();
+        inputManager.addProcessor(curScreen().getStage());
         screens.put("MainMenu", new MainMenuScreen(this));
         screens.put("LevelSelect", new LevelSelectScreen(this));
         this.curTransition = new EmptyTransition(null, null, this, 0);
+        Gdx.input.setInputProcessor(this.inputManager);
     }
     public GameScreen curScreen() {
         return activeScreen;
     }
     public GameScreen setCurScreen(String screenName) {
         GameScreen s;
+        inputManager.removeProcessor(curScreen().getStage());
         if((s = screens.get(screenName)) != null) {
             activeScreen = s;
         } else {
             Gdx.app.log("ScreenManager", "Trying to add a screen that doesn't exist.");
         }
-
+        inputManager.addProcessor(curScreen().getStage());
         return activeScreen;
     }
     public void dispose() {
 
     }
     public void resume() {
-        Gdx.input.setInputProcessor(this.curScreen().getStage());
+        Gdx.input.setInputProcessor(this.inputManager);
     }
     @Override
     public void changeScreen(String screen, TransitionType transitionType, float length) {

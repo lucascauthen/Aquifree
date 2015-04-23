@@ -3,6 +3,7 @@ package com.lucascauthen.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -13,9 +14,10 @@ import com.lucascauthen.util.AssetLoader;
  * Created by Administrator on 4/9/2015.
  */
 public class SplashScreen extends GameScreen {
-    private BitmapFont titleFont;
-    private Label.LabelStyle titleStyle;
-    private Label title;
+    BitmapFont titleFont;
+    Group foreGround;
+    Label.LabelStyle titleStyle;
+    Label title;
     public SplashScreen(ScreenChanger setParent) {
         super(setParent);
         this.stage = new Stage();
@@ -23,15 +25,23 @@ public class SplashScreen extends GameScreen {
         this.titleFont = (BitmapFont) AssetLoader.getInstance().getAsset("Fonts/MenuFont.fnt", AssetLoader.AssetType.BITMAPFONT);
         titleStyle.font = titleFont;
         title = new Label("Aquifree", titleStyle);
-        stage.addActor(title);
-        title.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
-        stage.addAction(Actions.sequence(Actions.delay(2.0f), Actions.run(new Runnable() {
+        foreGround = new Group();
+        foreGround.setBounds(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        foreGround.addActor(title);
+        stage.addActor(foreGround);
+        stage.addAction(Actions.sequence(Actions.run(new Runnable() {
+            @Override
+            public void run() {
+                title.setPosition(Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()/2);
+            }
+        }), Actions.delay(2.0f), Actions.run(new Runnable() {
             @Override
             public void run() {
                 parent.changeScreen("MainMenu", ScreenChanger.TransitionType.FADE_IN_OUT, 0.5f);
             }
         })));
     }
+
     @Override
     public void update(float delta) {
 

@@ -11,11 +11,10 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 public class LevelSelectScreen extends GameScreen {
     public LevelSelectScreen(ScreenChanger setParent) {
         super(setParent);
-        Gdx.input.setInputProcessor(stage);
         stage.addListener(new ClickListener() {
 
             @Override
-            public void touchUp(InputEvent event, float x, float y, int pointer, int button) {
+            public void clicked(InputEvent event, float x, float y) {
                 parent.changeScreen("MainMenu", ScreenChanger.TransitionType.FADE_IN_OUT, 0.5f);
             }
         });
@@ -28,7 +27,7 @@ public class LevelSelectScreen extends GameScreen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(10/255.0f, 200/255.0f, 230/255.0f, 1f);
+        Gdx.gl.glClearColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
         // Fills the screen with the selected color
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         stage.draw();
