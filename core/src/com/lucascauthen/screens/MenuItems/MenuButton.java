@@ -1,5 +1,6 @@
 package com.lucascauthen.screens.MenuItems;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -15,19 +16,20 @@ public class MenuButton {
     TextButton.TextButtonStyle style;
     TextureAtlas atlas;
     BitmapFont font;
-    public MenuButton(String text) {
-        font = (BitmapFont)AssetLoader.getInstance().getAsset("Fonts/MenuFont.fnt", AssetLoader.AssetType.BITMAPFONT);
+    public MenuButton(String text, Color color) {
+        font = (BitmapFont)AssetLoader.getInstance().getAsset("Fonts/MenuFont35.fnt", AssetLoader.AssetType.BITMAPFONT);
         skin = new Skin();
-        atlas = (TextureAtlas)AssetLoader.getInstance().getAsset("Buttons/Button_Regular.atlas", AssetLoader.AssetType.TEXTURE_ATLAS);
+        atlas = (TextureAtlas)AssetLoader.getInstance().getAsset("Buttons/Button_Large.atlas", AssetLoader.AssetType.TEXTURE_ATLAS);
         skin.addRegions(atlas);
         style = new TextButton.TextButtonStyle();
         style.font = font;
-        style.up = skin.getDrawable("Button_Regular");
-        style.down = skin.getDrawable("Button_Regular_Active");
+        style.fontColor = color;
+        style.up = skin.getDrawable("Button_Large");
+        style.down = skin.getDrawable("Button_Large_Active");
         button = new TextButton(text, style);
     }
 
-    public TextButton get() {
+    public TextButton getActor() {
         return button;
     }
 }

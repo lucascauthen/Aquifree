@@ -21,6 +21,7 @@ public class ScreenManager implements ScreenChanger {
         inputManager.addProcessor(curScreen().getStage());
         screens.put("MainMenu", new MainMenuScreen(this));
         screens.put("LevelSelect", new LevelSelectScreen(this));
+        screens.put("About", new AboutMenuScreen(this));
         this.curTransition = new EmptyTransition(null, null, this, 0);
         Gdx.input.setInputProcessor(this.inputManager);
     }
@@ -38,6 +39,15 @@ public class ScreenManager implements ScreenChanger {
         inputManager.addProcessor(curScreen().getStage());
         return activeScreen;
     }
+    public GameScreen getScreen(String screenName) {
+        GameScreen s;
+        if((s = screens.get(screenName)) != null) {
+            return s;
+        } else {
+            Gdx.app.log("ScreenManager", "Trying to add a screen that doesn't exist.");
+            return null;
+        }
+    }
     public void dispose() {
 
     }
@@ -48,8 +58,9 @@ public class ScreenManager implements ScreenChanger {
     public void changeScreen(String screen, TransitionType transitionType, float length) {
         Gdx.input.setInputProcessor(null);
         Stage before = this.curScreen().getStage();
-        Stage after = setCurScreen(screen).getStage();
+        Stage after = getScreen(screen).getStage();
         this.curTransition = newTransition(transitionType, before, after, length);
+        this.setCurScreen(screen);
     }
 
     @Override
