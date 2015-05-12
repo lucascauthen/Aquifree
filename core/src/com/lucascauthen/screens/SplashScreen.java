@@ -30,10 +30,10 @@ public class SplashScreen extends GameScreen {
         container.align(Align.center);
         container.setFillParent(true);
         stage.addActor(container);
-        stage.addAction(Actions.sequence(Actions.delay(2.0f), Actions.run(new Runnable() {
+        stage.addAction(Actions.sequence(Actions.delay(.250f), Actions.run(new Runnable() {
             @Override
             public void run() {
-                parent.changeScreen("MainMenu", ScreenChanger.TransitionType.FADE_IN_OUT, 1f);
+                parent.changeScreen("MainMenu", ScreenChanger.TransitionType.FADE_IN_OUT, .25f);
             }
         })));
     }

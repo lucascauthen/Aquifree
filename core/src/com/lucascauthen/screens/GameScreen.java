@@ -1,8 +1,16 @@
 package com.lucascauthen.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
+import com.badlogic.gdx.scenes.scene2d.ui.Button;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.lucascauthen.screens.MenuItems.MenuButton;
 
 /**
  * Created by Administrator on 4/7/2015.
@@ -10,7 +18,8 @@ import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 public abstract class GameScreen implements Screen{
     protected ScreenChanger parent;
     protected Stage stage;
-
+    private MenuButton backButton;
+    protected Table mainTable = new Table();
     public Stage getStage() {
         return stage;
     }
@@ -34,6 +43,18 @@ public abstract class GameScreen implements Screen{
     @Override
     public void resize(int width, int height) {
 
+    }
+    public void addBackButton(final String screenToGoBackTo) {
+        this.backButton = new MenuButton("", Color.BLACK);
+        this.mainTable.add(backButton.getActor());
+        float spacing = Gdx.graphics.getWidth() * (1.0f/100.0f);
+        this.mainTable.getCell(backButton.getActor()).align(Align.topLeft).spaceTop(spacing).spaceLeft(spacing);
+        this.backButton.getActor().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                parent.changeScreen(screenToGoBackTo, ScreenChanger.TransitionType.FADE_IN_OUT, 0.25f);
+            }
+        });
     }
     @Override
     public abstract void pause();

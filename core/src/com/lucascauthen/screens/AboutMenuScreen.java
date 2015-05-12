@@ -17,7 +17,6 @@ import com.lucascauthen.screens.MenuItems.MenuText;
  * Created by Administrator on 4/7/2015.
  */
 public class AboutMenuScreen extends GameScreen {
-    Table contentsTable;
     MenuText text;
     ScrollPane scrollPane;
     Table scrollTable;
@@ -30,7 +29,6 @@ public class AboutMenuScreen extends GameScreen {
     public AboutMenuScreen(ScreenChanger setParent) {
         super(setParent);
         stage = new Stage();
-        contentsTable = new Table();
         scrollTable = new Table();
         String about = "The purpose of this project is to raise money for people who need water. Water is the most important resource in everyone's life. " +
                 "It is a sad fact of life that not everyone has access to clean water. By playing this game, 90% of the ad revenue goes toward clean water projects. " +
@@ -38,18 +36,12 @@ public class AboutMenuScreen extends GameScreen {
                 "Than you for playing";
         text = new MenuText(about, "Fonts/MenuFont70.fnt", Color.BLACK);
         text.getActor().setWrap(true);
-        contentsTable.add(text.getActor()).width(Gdx.app.getGraphics().getWidth() * (2.0f / 3.0f));
-        scrollPane = new ScrollPane(contentsTable);
+        mainTable.add(text.getActor()).width(Gdx.app.getGraphics().getWidth() * (2.0f / 3.0f));
+        scrollPane = new ScrollPane(mainTable);
         scrollTable.add(scrollPane).fill().expand();
         scrollTable.setFillParent(true);
         stage.addActor(scrollTable);
-        stage.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                parent.changeScreen("MainMenu", ScreenChanger.TransitionType.FADE_IN_OUT, 1.0f);
-            }
-
-        });
+        this.addBackButton("MainMenu");
         stage.addListener(new DragScrollListener(scrollPane) {
         });
     }

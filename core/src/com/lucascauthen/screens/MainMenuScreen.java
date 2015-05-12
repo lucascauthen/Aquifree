@@ -26,7 +26,6 @@ public class MainMenuScreen extends GameScreen {
 
     Image backgroundImage;
     Texture backgroundTexture;
-    Table menuContents;
     Table backgroundContents;
 
     public MainMenuScreen(final ScreenChanger parent) {
@@ -47,25 +46,22 @@ public class MainMenuScreen extends GameScreen {
         playButton = new MenuButton("Play", Color.WHITE);
         aboutButton = new MenuButton("About", Color.WHITE);
         settingsButton = new MenuButton("Settings", Color.WHITE);
-        menuContents = new Table();
 
+        mainTable.add(playButton.getActor()).expandX().center().row();
+        mainTable.row();
 
+        mainTable.add(aboutButton.getActor()).expandX().center().row();
+        mainTable.row();
+        mainTable.add(settingsButton.getActor()).expandX().center().row();
+        mainTable.setFillParent(true);
+        mainTable.align(Align.center);
 
-        menuContents.add(playButton.getActor()).expandX().center().row();
-        menuContents.row();
-
-        menuContents.add(aboutButton.getActor()).expandX().center().row();
-        menuContents.row();
-        menuContents.add(settingsButton.getActor()).expandX().center().row();
-        menuContents.setFillParent(true);
-        menuContents.align(Align.center);
-
-        menuContents.getCell(playButton.getActor()).spaceBottom(PADDING);
-        menuContents.getCell(aboutButton.getActor()).spaceBottom(PADDING);
+        mainTable.getCell(playButton.getActor()).spaceBottom(PADDING);
+        mainTable.getCell(aboutButton.getActor()).spaceBottom(PADDING);
 
 
         stage.addActor(backgroundContents);
-        stage.addActor(menuContents);
+        stage.addActor(mainTable);
 
 
         //Listeners
@@ -78,7 +74,7 @@ public class MainMenuScreen extends GameScreen {
         aboutButton.getActor().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                parent.changeScreen("About", ScreenChanger.TransitionType.FADE_IN_OUT, 1.0f);
+                parent.changeScreen("About", ScreenChanger.TransitionType.FADE_IN_OUT, 0.25f);
             }
         });
 
