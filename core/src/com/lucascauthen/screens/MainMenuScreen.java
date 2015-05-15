@@ -7,9 +7,10 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.lucascauthen.screens.MenuItems.MenuButton;
+import com.lucascauthen.screens.MenuItems.TextMenuButton;
 import com.lucascauthen.util.AssetLoader;
 
 /**
@@ -41,7 +42,7 @@ public class MainMenuScreen extends GameScreen {
         //backgroundContents.getCell(backgroundImage).center();
         //Foreground stuff
         //Foreground buttons
-        playButton = new MenuButton("Play", Color.WHITE);
+        playButton = new TextMenuButton("Play", Color.WHITE);
         aboutButton = new MenuButton("About", Color.WHITE);
         settingsButton = new MenuButton("Settings", Color.WHITE);
 

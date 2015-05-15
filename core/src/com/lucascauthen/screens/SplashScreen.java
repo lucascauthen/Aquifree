@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.utils.Align;
 import com.lucascauthen.screens.MenuItems.MenuText;
 
 
@@ -20,7 +20,7 @@ public class SplashScreen extends GameScreen {
         super(setParent);
         this.stage = new Stage();
         container = new Table();
-        text = new MenuText("Auifree", "Fonts/MenuFont70.fnt", Color.BLACK);
+        text = new MenuText("Auifree", "Fonts/blocked.ttf", Color.BLACK, 70);
 
         container.add(text.getActor());
         container.align(Align.center);
