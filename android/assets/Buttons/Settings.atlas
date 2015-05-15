@@ -1,19 +1,19 @@
 
-Button_Large.png
+Settings.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-Button_Large
+Settings_DOWN
   rotate: false
   xy: 1, 1
-  size: 500, 192
-  orig: 500, 192
+  size: 277, 320
+  orig: 277, 320
   offset: 0, 0
   index: -1
-Button_Large_Active
+Settings_UP
   rotate: false
-  xy: 503, 1
-  size: 500, 192
-  orig: 500, 192
+  xy: 280, 1
+  size: 277, 320
+  orig: 277, 320
   offset: 0, 0
   index: -1

@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
  * Created by XPS on 5/14/2015.
  */
 public abstract class TextMenuItem extends MenuItem{
-    protected static final String DEFAULT_FONT = "blocked.ttf";
+    protected static final String DEFAULT_FONT = "Fonts/blocked.ttf";
     protected BitmapFont font;
     protected FreeTypeFontGenerator fontGenerator;
     protected FreeTypeFontGenerator.FreeTypeFontParameter parameters = new FreeTypeFontGenerator.FreeTypeFontParameter();

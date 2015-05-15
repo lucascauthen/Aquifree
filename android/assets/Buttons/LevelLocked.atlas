@@ -1,0 +1,19 @@
+
+LevelLocked.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+LevelLocked_DOWN
+  rotate: false
+  xy: 1, 1
+  size: 277, 320
+  orig: 277, 320
+  offset: 0, 0
+  index: -1
+LevelLocked_UP
+  rotate: false
+  xy: 1, 1
+  size: 277, 320
+  orig: 277, 320
+  offset: 0, 0
+  index: -1

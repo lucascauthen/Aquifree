@@ -1,0 +1,19 @@
+
+Back.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Back_DOWN
+  rotate: false
+  xy: 1, 1
+  size: 277, 320
+  orig: 277, 320
+  offset: 0, 0
+  index: -1
+Back_UP
+  rotate: false
+  xy: 280, 1
+  size: 277, 320
+  orig: 277, 320
+  offset: 0, 0
+  index: -1

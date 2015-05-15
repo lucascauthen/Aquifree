@@ -30,18 +30,20 @@ public class TextMenuButton extends TextMenuItem{
     private Skin skin;
     private TextButton.TextButtonStyle style;
     private TextureAtlas atlas;
-    public TextMenuButton(String imgFile, String text, Color fontColor, int fontSize) {
-        this(imgFile, DEFAULT_FONT, text, fontColor, fontSize);
+    public TextMenuButton(String imgAtlasFile, String text, Color fontColor, int fontSize) {
+        this(imgAtlasFile, DEFAULT_FONT, text, fontColor, fontSize);
     }
-    public TextMenuButton(String text, String fontFile, String imgFile, Color fontColor, int fontSize) {
+    public TextMenuButton(String text, String fontFile, String imgAtlasFile, Color fontColor, int fontSize) {
         super(text, fontFile, fontColor, fontSize);
-        atlas = (TextureAtlas) AssetLoader.getInstance().getAsset(imgFile, AssetLoader.AssetType.TEXTURE_ATLAS);
+        atlas = (TextureAtlas) AssetLoader.getInstance().getAsset(imgAtlasFile, AssetLoader.AssetType.TEXTURE_ATLAS);
         skin = new Skin();
         skin.addRegions(atlas);
-        imgFile = imgFile.substring(imgFile.lastIndexOf('/'), imgFile.lastIndexOf('.'));
+        imgAtlasFile = imgAtlasFile.substring(imgAtlasFile.lastIndexOf('/'), imgAtlasFile.lastIndexOf('.'));
         style = new TextButton.TextButtonStyle();
-        style.up = skin.getDrawable(imgFile + "_UP");
-        style.down = skin.getDrawable(imgFile + "_DOWN");
+        style.up = skin.getDrawable(imgAtlasFile + "_UP");
+        style.down = skin.getDrawable(imgAtlasFile + "_DOWN");
+        style.font = updateText();
+
         button = new TextButton(this.getText(), style);
     }
 

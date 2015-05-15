@@ -1,7 +1,11 @@
 package com.lucascauthen.screens;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.lucascauthen.Game.Map;
 import com.lucascauthen.util.MapLoader;
 
@@ -9,12 +13,19 @@ import com.lucascauthen.util.MapLoader;
  * Created by Administrator on 4/24/2015.
  */
 public class PlayScreen extends GameScreen {
-    private OrthographicCamera camera;
-    private TiledMapRenderer tiledMapRenderer;
+    private OrthographicCamera camera = new OrthographicCamera();
+    private OrthogonalTiledMapRenderer tiledMapRenderer;
     private Map map;
-    public PlayScreen(ScreenChanger parent, MapLoader mapLoader) {
-        super(parent);
+    public PlayScreen(ScreenChanger parent) {
+    super(parent);
+    this.map = new Map();
+}
 
+    @Override
+    public void resize(int width, int height) {
+        camera.viewportWidth = width;
+        camera.viewportHeight = height;
+        camera.update();
     }
 
     @Override
@@ -24,7 +35,11 @@ public class PlayScreen extends GameScreen {
 
     @Override
     public void render(float delta) {
-
+        Gdx.gl.glClearColor(255/255.0f, 255/255.0f, 255/255.0f, 1f);
+        // Fills the screen with the selected color
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        map.update(delta);
+        map.render();
     }
 
     @Override

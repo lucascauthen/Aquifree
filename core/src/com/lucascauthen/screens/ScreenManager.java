@@ -16,7 +16,6 @@ public class ScreenManager implements ScreenChanger {
     private GameScreen activeScreen;
     private ArrayMap<String, GameScreen> screens;
     private AssetLoader assetLoader;
-    private MapLoader mapLoader = new MapLoader();
     public Transition curTransition;
     private InputProcessor androidBackProcessor = new InputAdapter() {
         @Override
@@ -38,7 +37,7 @@ public class ScreenManager implements ScreenChanger {
         screens.put("LevelSelect", new LevelSelectScreen(this));
         screens.put("About", new AboutMenuScreen(this));
         screens.put("Settings", new SettingsMenuScreen(this));
-        screens.put("Play", new PlayScreen(this, mapLoader));
+        screens.put("Play", new PlayScreen(this));
         this.curTransition = new EmptyTransition(null, null, this, 0);
         Gdx.input.setInputProcessor(this.inputManager);
         Gdx.input.setCatchBackKey(true);

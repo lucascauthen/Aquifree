@@ -1,0 +1,19 @@
+
+LevelComplete.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+LevelComplete_DOWN
+  rotate: false
+  xy: 1, 1
+  size: 208, 160
+  orig: 208, 160
+  offset: 0, 0
+  index: -1
+LevelComplete_UP
+  rotate: false
+  xy: 211, 1
+  size: 208, 160
+  orig: 208, 160
+  offset: 0, 0
+  index: -1

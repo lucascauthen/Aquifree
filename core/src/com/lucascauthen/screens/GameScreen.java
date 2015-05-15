@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.Align;
+import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.lucascauthen.screens.MenuItems.MenuButton;
 import com.lucascauthen.util.AssetLoader;
@@ -45,7 +45,7 @@ public abstract class GameScreen implements Screen {
 
     }
     public void addBackButton() {
-        this.backButton = new MenuButton("", Color.BLACK);
+        this.backButton = new MenuButton("Buttons/BackButton.png");
         this.mainTable.add(backButton.getActor());
         float spacing = Gdx.graphics.getWidth() * (1.0f/100.0f);
         this.mainTable.getCell(backButton.getActor()).align(Align.topLeft).spaceTop(spacing).spaceLeft(spacing);

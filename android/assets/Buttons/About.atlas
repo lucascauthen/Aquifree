@@ -1,19 +1,19 @@
 
-Button_Regular.png
+About.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-Button_Regular
+About_DOWN
   rotate: false
   xy: 1, 1
-  size: 200, 77
-  orig: 200, 77
+  size: 347, 320
+  orig: 347, 320
   offset: 0, 0
   index: -1
-Button_Regular_Active
+About_UP
   rotate: false
-  xy: 203, 1
-  size: 200, 77
-  orig: 200, 77
+  xy: 350, 1
+  size: 347, 320
+  orig: 347, 320
   offset: 0, 0
   index: -1

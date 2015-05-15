@@ -17,7 +17,7 @@ import com.lucascauthen.util.AssetLoader;
  * Created by Administrator on 4/7/2015.
  */
 public class MainMenuScreen extends GameScreen {
-    private final float PADDING = 100f;
+    private final float PADDING = 15f;
     MenuButton playButton;
     MenuButton aboutButton;
     MenuButton settingsButton;
@@ -33,30 +33,32 @@ public class MainMenuScreen extends GameScreen {
 
         //Background stuff
         backgroundContents = new Table();
+        backgroundContents.setDebug(true);
         backgroundTexture = (Texture)AssetLoader.getInstance().getAsset("Backgrounds/MainMenu.png", AssetLoader.AssetType.TEXTURE);
         backgroundImage = new Image(backgroundTexture);
         backgroundImage.setAlign(Align.center);
-        backgroundContents.add(backgroundImage);
+        backgroundContents.add(backgroundImage).padTop(PADDING);
         backgroundContents.setFillParent(true);
-        backgroundContents.align(Align.center);
-        //backgroundContents.getCell(backgroundImage).center();
+        backgroundContents.align(Align.top);
+
         //Foreground stuff
         //Foreground buttons
-        playButton = new TextMenuButton("Play", Color.WHITE);
-        aboutButton = new MenuButton("About", Color.WHITE);
-        settingsButton = new MenuButton("Settings", Color.WHITE);
+        mainTable.setDebug(true);
+        mainTable.setY(backgroundContents.getY() + backgroundContents.getHeight());
 
-        mainTable.add(playButton.getActor()).expandX().center().row();
-        mainTable.row();
+        playButton = new MenuButton("Buttons/Play.atlas");
+        aboutButton = new MenuButton("Buttons/About.atlas");
+        settingsButton = new MenuButton("Buttons/Settings.atlas");
 
-        mainTable.add(aboutButton.getActor()).expandX().center().row();
-        mainTable.row();
-        mainTable.add(settingsButton.getActor()).expandX().center().row();
+        mainTable.add(playButton.getActor()).center().top().expandX().row();
+
+        mainTable.add(aboutButton.getActor()).align(Align.bottomRight);
+        mainTable.add(settingsButton.getActor()).align(Align.bottomLeft);
         mainTable.setFillParent(true);
         mainTable.align(Align.center);
 
-        mainTable.getCell(playButton.getActor()).spaceBottom(PADDING);
-        mainTable.getCell(aboutButton.getActor()).spaceBottom(PADDING);
+        //mainTable.getCell(playButton.getActor()).spaceBottom(PADDING);
+        //mainTable.getCell(aboutButton.getActor()).spaceBottom(PADDING);
 
 
         stage.addActor(backgroundContents);

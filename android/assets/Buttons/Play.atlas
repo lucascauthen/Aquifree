@@ -1,0 +1,19 @@
+
+Play.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+Play_UP
+  rotate: false
+  xy: 1, 120
+  size: 486, 134
+  orig: 486, 134
+  offset: 0, 0
+  index: -1
+Play_DOWN
+  rotate: false
+  xy: 1, 1
+  size: 420, 117
+  orig: 420, 117
+  offset: 0, 0
+  index: -1

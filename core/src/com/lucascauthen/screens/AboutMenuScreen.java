@@ -27,10 +27,10 @@ public class AboutMenuScreen extends GameScreen {
         stage = new Stage();
         scrollTable = new Table();
         String about = "The purpose of this project is to raise money for people who need water. Water is the most important resource in everyone's life. " +
-                "It is a sad fact of life that not everyone has access to clean water. By playing this game, 90% of the ad revenue goes toward clean water projects. " +
-                "The remaining 10% will go toward paying for the costs of running this app, and hopefully there will be a little left over to go to my college fund. " +
-                "Than you for playing";
-        text = new MenuText(about, "Fonts/MenuFont70.fnt", Color.BLACK);
+                "It is a sad fact that not everyone has access to clean water. By playing this game, 90 percent of the ad revenue goes toward clean water projects. " +
+                "The remaining 10 percent will go toward paying for the costs of running this app, and hopefully there will be a little left over to go to my college fund. " +
+                "Thank you for playing";
+        text = new MenuText(about, Color.BLACK, 70);
         text.getActor().setWrap(true);
         mainTable.add(text.getActor()).width(Gdx.app.getGraphics().getWidth() * (2.0f / 3.0f));
         scrollPane = new ScrollPane(mainTable);

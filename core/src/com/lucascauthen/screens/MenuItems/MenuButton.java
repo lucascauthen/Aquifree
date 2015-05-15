@@ -25,15 +25,20 @@ public class MenuButton {
     private Skin skin;
     private Button.ButtonStyle style;
     private TextureAtlas atlas;
-    public MenuButton(String imgFile) {
-        atlas = (TextureAtlas)AssetLoader.getInstance().getAsset(imgFile, AssetLoader.AssetType.TEXTURE_ATLAS);
+    private float scale = 1;
+    public MenuButton(String imgAtlasFile) {
+        atlas = (TextureAtlas)AssetLoader.getInstance().getAsset(imgAtlasFile, AssetLoader.AssetType.TEXTURE_ATLAS);
         skin = new Skin();
         skin.addRegions(atlas);
-        imgFile = imgFile.substring(imgFile.lastIndexOf('/'), imgFile.lastIndexOf('.'));
+        imgAtlasFile = imgAtlasFile.substring(imgAtlasFile.lastIndexOf('/') + 1, imgAtlasFile.lastIndexOf('.'));
         style = new Button.ButtonStyle();
-        style.up = skin.getDrawable(imgFile + "_UP");
-        style.down = skin.getDrawable(imgFile + "_DOWN");
+        style.up = skin.getDrawable(imgAtlasFile + "_UP");
+        style.down = skin.getDrawable(imgAtlasFile + "_DOWN");
         button = new Button(style);
+    }
+    public void setScale(float scale) {
+        button.setWidth(button.getWidth() * scale);
+        button.setHeight(button.getHeight() * scale);
     }
     public Button getActor() {
         return button;

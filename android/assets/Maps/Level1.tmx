@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="8" height="15" tilewidth="360" tileheight="360" nextobjectid="21">
+ <tileset firstgid="1" name="TileSheet-Small" tilewidth="360" tileheight="360">
+  <image source="../TileSheets/TileSheet-Small.png" width="1800" height="1800"/>
+ </tileset>
+ <layer name="Tiles" width="8" height="15">
+  <data encoding="base64" compression="zlib">
+   eJwTYWBgEKES5gRiLhxyQkDMB8T8OOR5CJhNiTzIbhAQhGJ0d6LrRXcnLd0Gk8cXdmIEwg4fBgA10Ail
+  </data>
+ </layer>
+ <objectgroup name="Objects">
+  <object id="15" name="Joint 1" gid="23" x="720" y="2880">
+   <properties>
+    <property name="numStates" value="2"/>
+    <property name="state0" value="rotate:0"/>
+    <property name="state1" value="rotate:-270"/>
+   </properties>
+  </object>
+  <object id="16" name="Input1" x="1080" y="1080" width="360" height="360">
+   <properties>
+    <property name="color0" value="Blue"/>
+    <property name="color1" value="Red"/>
+    <property name="numColors" value="2"/>
+   </properties>
+  </object>
+  <object id="17" name="Output1" x="1800" y="2520" width="360" height="360">
+   <properties>
+    <property name="color" value="Blue"/>
+   </properties>
+  </object>
+  <object id="18" name="Output2" x="720" y="4680" width="360" height="360">
+   <properties>
+    <property name="color" value="Red"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
