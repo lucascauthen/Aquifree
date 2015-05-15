@@ -4,9 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
@@ -68,7 +66,7 @@ public class MainMenuScreen extends GameScreen {
         playButton.getActor().addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                parent.changeScreen("LevelSelect", ScreenChanger.TransitionType.FADE_IN_OUT, 1.0f);
+                parent.changeScreen("LevelSelect", ScreenChanger.TransitionType.FADE_IN_OUT, 0.25f);
             }
         });
         aboutButton.getActor().addListener(new ClickListener() {
@@ -77,7 +75,12 @@ public class MainMenuScreen extends GameScreen {
                 parent.changeScreen("About", ScreenChanger.TransitionType.FADE_IN_OUT, 0.25f);
             }
         });
-
+        settingsButton.getActor().addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                parent.changeScreen("Settings", ScreenChanger.TransitionType.FADE_IN_OUT, 0.25f);
+            }
+        });
         //Fade in action
 
     }

@@ -6,6 +6,8 @@ package com.lucascauthen.screens;
 public class SettingsMenuScreen extends GameScreen {
     public SettingsMenuScreen(ScreenChanger parent) {
         super(parent);
+        this.backScreen = "MainMenu";
+
     }
 
     @Override

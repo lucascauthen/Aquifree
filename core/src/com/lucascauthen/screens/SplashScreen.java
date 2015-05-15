@@ -3,15 +3,11 @@ package com.lucascauthen.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.scenes.scene2d.Group;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.utils.Align;
 import com.lucascauthen.screens.MenuItems.MenuText;
-import com.lucascauthen.util.AssetLoader;
 
 
 /**
@@ -30,7 +26,7 @@ public class SplashScreen extends GameScreen {
         container.align(Align.center);
         container.setFillParent(true);
         stage.addActor(container);
-        stage.addAction(Actions.sequence(Actions.delay(.250f), Actions.run(new Runnable() {
+        stage.addAction(Actions.sequence(Actions.delay(1.5f), Actions.run(new Runnable() {
             @Override
             public void run() {
                 parent.changeScreen("MainMenu", ScreenChanger.TransitionType.FADE_IN_OUT, .25f);

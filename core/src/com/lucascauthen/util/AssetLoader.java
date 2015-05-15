@@ -69,6 +69,7 @@ public class AssetLoader {
         for(Asset asset: assetList) {
             asset.getItem().dispose();
         }
+        assetList.clear();
     }
     public enum AssetType {
         TEXTURE,

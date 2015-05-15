@@ -3,13 +3,9 @@ package com.lucascauthen.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.actions.Actions;
-import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ScrollPane;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.scenes.scene2d.utils.DragScrollListener;
 import com.lucascauthen.screens.MenuItems.MenuText;
 
@@ -41,7 +37,8 @@ public class AboutMenuScreen extends GameScreen {
         scrollTable.add(scrollPane).fill().expand();
         scrollTable.setFillParent(true);
         stage.addActor(scrollTable);
-        this.addBackButton("MainMenu");
+        this.backScreen = "MainMenu";
+        //this.addBackButton();
         stage.addListener(new DragScrollListener(scrollPane) {
         });
     }

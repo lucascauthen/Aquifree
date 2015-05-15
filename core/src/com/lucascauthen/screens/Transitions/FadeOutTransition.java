@@ -25,20 +25,20 @@ public class FadeOutTransition extends Transition {
         after.addAction(Actions.alpha(0));
         after.act();
         active = before;
-        primaryTask();
+        fadeOutTask();
     }
     //This is called to fade out the before screen
-    public void primaryTask() {
+    public void fadeOutTask() {
         active.addAction(Actions.sequence(Actions.alpha(0, duration), Actions.run(new Runnable() {
             @Override
             public void run() {
                 active = after;
-                secondaryTask();
+                fadeInTask();
             }
         })));
     }
     //This is called when the primary task is finished. This fades in the after stage
-    public void secondaryTask() {
+    public void fadeInTask() {
         active.addAction(Actions.sequence(Actions.alpha(1, duration), Actions.run(new Runnable() {
             @Override
             public void run() {

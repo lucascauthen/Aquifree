@@ -3,7 +3,7 @@ import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.Preferences;
 import com.lucascauthen.screens.ScreenManager;
 import com.lucascauthen.util.AssetLoader;
 
@@ -16,7 +16,9 @@ public class AquifreeGame extends ApplicationAdapter {
 	public void create () {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
         this.screenManager = new ScreenManager();
-
+        Preferences generalPrefs = Gdx.app.getPreferences("Aquifree Data");
+        generalPrefs.putInteger("NumLvLs", 10);
+        generalPrefs.flush();
 	}
 
 	@Override

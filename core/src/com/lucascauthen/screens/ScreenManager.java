@@ -1,29 +1,51 @@
 package com.lucascauthen.screens;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputAdapter;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.ArrayMap;
 import com.lucascauthen.screens.Transitions.*;
 import com.lucascauthen.util.AssetLoader;
+import com.lucascauthen.util.MapLoader;
 
 
 public class ScreenManager implements ScreenChanger {
     private GameScreen activeScreen;
-    private ArrayMap<java.lang.String, GameScreen> screens;
-    private AssetLoader loader;
+    private ArrayMap<String, GameScreen> screens;
+    private AssetLoader assetLoader;
+    private MapLoader mapLoader = new MapLoader();
     public Transition curTransition;
+    private InputProcessor androidBackProcessor = new InputAdapter() {
+        @Override
+        public boolean keyDown(int keycode) {
+            test();
+            if (keycode == Input.Keys.BACK) {
+                curScreen().back(0.25f);
+            }
+            return false;
+        }
+    };
     public InputMultiplexer inputManager = new InputMultiplexer();
     public ScreenManager() {
-        screens = new ArrayMap<java.lang.String, GameScreen>();
+        screens = new ArrayMap<String, GameScreen>();
         screens.put("Splash", new SplashScreen(this));
         activeScreen = screens.firstValue();
         inputManager.addProcessor(curScreen().getStage());
         screens.put("MainMenu", new MainMenuScreen(this));
         screens.put("LevelSelect", new LevelSelectScreen(this));
         screens.put("About", new AboutMenuScreen(this));
+        screens.put("Settings", new SettingsMenuScreen(this));
+        screens.put("Play", new PlayScreen(this, mapLoader));
         this.curTransition = new EmptyTransition(null, null, this, 0);
         Gdx.input.setInputProcessor(this.inputManager);
+        Gdx.input.setCatchBackKey(true);
+        this.inputManager.addProcessor(androidBackProcessor); //Used to handle back button events
+    }
+    public void test() {
+        Gdx.app.log("ScreenManager", "Back clicked");
     }
     public GameScreen curScreen() {
         return activeScreen;
@@ -45,6 +67,7 @@ public class ScreenManager implements ScreenChanger {
             return s;
         } else {
             Gdx.app.log("ScreenManager", "Trying to add a screen that doesn't exist.");
+
             return null;
         }
     }

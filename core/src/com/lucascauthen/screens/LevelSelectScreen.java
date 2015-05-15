@@ -9,8 +9,11 @@ import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
  * Created by Administrator on 4/7/2015.
  */
 public class LevelSelectScreen extends GameScreen {
+    ArrayList
+
     public LevelSelectScreen(ScreenChanger setParent) {
         super(setParent);
+        this.backScreen = "MainMenu";
         stage.addListener(new ClickListener() {
 
             @Override
@@ -19,7 +22,10 @@ public class LevelSelectScreen extends GameScreen {
             }
         });
     }
-
+    public void loadUI() {
+        int numLvls = Gdx.app.getPreferences("Aquifree Data").getInteger("NumLvLs");
+        
+    }
     @Override
     public void update(float delta) {
 
