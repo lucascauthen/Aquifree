@@ -6,6 +6,10 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 /**
  * Created by Administrator on 4/24/2015.
  */
+
+/*
+
+ */
 public class MapLoader {
     private TiledMap map;
     private static MapLoader instance;

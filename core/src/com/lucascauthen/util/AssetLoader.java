@@ -13,18 +13,21 @@ import java.util.ArrayList;
 /**
  * Created by Administrator on 4/7/2015.
  */
+/*
+    Purpose: Manages all libgdx disposable assets.
+        Ensures that there are never duplicate assets created.
+        Ensures that assets aren't disposed of prematurely
+        Helps reduce overhead by allowing different screens with identical assets to share such assets without duplication
+
+
+    Structure Note: This class is a singleton, meaning that it is a global class that can only have one instance.
+
+    NOTE:
+        After the addition of the freetype font generator, this class no longer has functionality for managing BITMAP fonts
+        This will be added soon.
+ */
 public class AssetLoader {
     private ArrayList<Asset> assetList = new ArrayList<Asset>();
-    private static AssetLoader assetLoader;
-    private AssetLoader() {
-        this.assetList = new ArrayList<Asset>();
-    }
-    public static AssetLoader getInstance() {
-        if(assetLoader == null) {
-            assetLoader = new AssetLoader();
-        }
-        return assetLoader;
-    }
     private int curId;
     private int nextId(){
         return ++curId;

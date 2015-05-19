@@ -34,7 +34,7 @@ public class MainMenuScreen extends GameScreen {
         //Background stuff
         backgroundContents = new Table();
         backgroundContents.setDebug(true);
-        backgroundTexture = (Texture)AssetLoader.getInstance().getAsset("Backgrounds/MainMenu.png", AssetLoader.AssetType.TEXTURE);
+        backgroundTexture = (Texture)assetLoader.getAsset("Backgrounds/MainMenu.png", AssetLoader.AssetType.TEXTURE);
         backgroundImage = new Image(backgroundTexture);
         backgroundImage.setAlign(Align.center);
         backgroundContents.add(backgroundImage).padTop(PADDING);

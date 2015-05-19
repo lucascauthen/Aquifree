@@ -5,13 +5,17 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.lucascauthen.screens.ScreenManager;
+import com.lucascauthen.util.Asset;
 import com.lucascauthen.util.AssetLoader;
+import com.lucascauthen.modules.AssetLoaderModule;
+
 
 
 public class AquifreeGame extends ApplicationAdapter {
 
     private ScreenManager screenManager;
 	private Game game;
+    private AssetLoader assetLoader;
 	@Override
 	public void create () {
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
@@ -28,6 +32,6 @@ public class AquifreeGame extends ApplicationAdapter {
 
     @Override
     public void dispose() {
-        AssetLoader.getInstance().disposeAll();
+        assetLoader.disposeAll();
     }
 }

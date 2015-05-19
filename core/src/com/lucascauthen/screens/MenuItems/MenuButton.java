@@ -20,14 +20,14 @@ import com.lucascauthen.util.AssetLoader;
         DOWN name: Settings_DOWN
 
 */
-public class MenuButton {
+public class MenuButton extends MenuItem{
     private Button button;
     private Skin skin;
     private Button.ButtonStyle style;
     private TextureAtlas atlas;
     private float scale = 1;
     public MenuButton(String imgAtlasFile) {
-        atlas = (TextureAtlas)AssetLoader.getInstance().getAsset(imgAtlasFile, AssetLoader.AssetType.TEXTURE_ATLAS);
+        atlas = (TextureAtlas)assetLoader.getAsset(imgAtlasFile, AssetLoader.AssetType.TEXTURE_ATLAS);
         skin = new Skin();
         skin.addRegions(atlas);
         imgAtlasFile = imgAtlasFile.substring(imgAtlasFile.lastIndexOf('/') + 1, imgAtlasFile.lastIndexOf('.'));

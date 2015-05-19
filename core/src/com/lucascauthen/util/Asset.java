@@ -5,6 +5,9 @@ import com.badlogic.gdx.utils.Disposable;
 /**
  * Created by XPS on 4/12/2015.
  */
+/*
+    Purpose: Serves as a wrapper to the disposable class (libgdx)
+ */
 public class Asset {
     public Disposable getItem() {
         return item;

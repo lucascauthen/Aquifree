@@ -10,16 +10,24 @@ import com.badlogic.gdx.utils.Align;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.lucascauthen.screens.MenuItems.MenuButton;
 import com.lucascauthen.util.AssetLoader;
+import com.lucascauthen.modules.AssetLoaderModule;
+
 
 /**
  * Created by Administrator on 4/7/2015.
  */
+/*
+    Purpose: Serves as the base for all other screens. Includes implementation for a back button/back functionality
+ */
+
 public abstract class GameScreen implements Screen {
     protected ScreenChanger parent;
     protected Stage stage;
     private MenuButton backButton;
     protected Table mainTable = new Table();
     protected String backScreen;
+    protected AssetLoader assetLoader;
+
     public Stage getStage() {
         return stage;
     }
@@ -31,6 +39,7 @@ public abstract class GameScreen implements Screen {
     public GameScreen(ScreenChanger parent) {
         this.parent = parent;
         this.stage = new Stage();
+
     }
     @Override
     public void show() {
@@ -60,8 +69,7 @@ public abstract class GameScreen implements Screen {
         if(backScreen != null) //In the back screen is set then go to the desired screen
             parent.changeScreen(backScreen, ScreenChanger.TransitionType.FADE_IN_OUT, time);
         else {//Otherwise exit the app
-            AssetLoader test = AssetLoader.getInstance();
-            AssetLoader.getInstance().disposeAll();
+            assetLoader.disposeAll();
             Gdx.app.exit();
         }
     }

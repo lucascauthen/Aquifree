@@ -21,7 +21,7 @@ public class MenuText  extends TextMenuItem{
     public MenuText(String text, String fontFile, Color color, int fontSize) {
         super(text, fontFile, color, fontSize);
         this.style = new Label.LabelStyle();
-        this.fontGenerator = (FreeTypeFontGenerator)AssetLoader.getInstance().getAsset(fontFile, AssetLoader.AssetType.FONT_GENERATOR);
+        this.fontGenerator = (FreeTypeFontGenerator)assetLoader.getAsset(fontFile, AssetLoader.AssetType.FONT_GENERATOR);
         this.parameters.color = color;
         this.text = text;
         this.parameters.size = fontSize;

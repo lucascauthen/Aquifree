@@ -35,7 +35,7 @@ public class TextMenuButton extends TextMenuItem{
     }
     public TextMenuButton(String text, String fontFile, String imgAtlasFile, Color fontColor, int fontSize) {
         super(text, fontFile, fontColor, fontSize);
-        atlas = (TextureAtlas) AssetLoader.getInstance().getAsset(imgAtlasFile, AssetLoader.AssetType.TEXTURE_ATLAS);
+        atlas = (TextureAtlas)assetLoader.getAsset(imgAtlasFile, AssetLoader.AssetType.TEXTURE_ATLAS);
         skin = new Skin();
         skin.addRegions(atlas);
         imgAtlasFile = imgAtlasFile.substring(imgAtlasFile.lastIndexOf('/'), imgAtlasFile.lastIndexOf('.'));
