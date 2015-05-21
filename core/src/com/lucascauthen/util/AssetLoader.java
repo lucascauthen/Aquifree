@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.utils.Disposable;
+import com.lucascauthen.Managers.Assets.DisposableAsset;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,7 @@ import java.util.ArrayList;
         This will be added soon.
  */
 public class AssetLoader {
-    private ArrayList<Asset> assetList = new ArrayList<Asset>();
+    private ArrayList<DisposableAsset> disposableAssetList = new ArrayList<DisposableAsset>();
     private int curId;
     private int nextId(){
         return ++curId;
@@ -35,9 +36,9 @@ public class AssetLoader {
     public Disposable getAsset(String fileName, AssetType type) {
         FileHandle file = Gdx.files.internal(fileName);
         if(file.exists()) {
-            for(Asset asset: this.assetList) {
-                if(asset.getName().equals(fileName) && asset.getType().equals(type)) {
-                    return asset.getItem();
+            for(DisposableAsset disposableAsset : this.disposableAssetList) {
+                if(disposableAsset.getName().equals(fileName) && disposableAsset.getType().equals(type)) {
+                    return disposableAsset.getItem();
                 }
             }
             //Hasn't been loaded already so please load it now
@@ -50,16 +51,16 @@ public class AssetLoader {
     private Disposable loadAsset(String fileName, AssetType type) {
         switch(type) {
             case TEXTURE:
-                assetList.add(new Asset(new Texture(Gdx.files.internal(fileName)), fileName, nextId(), type));
+                disposableAssetList.add(new DisposableAsset(new Texture(Gdx.files.internal(fileName)), fileName, nextId(), type));
                 return getLatestItem();
             case BITMAPFONT:
-                assetList.add(new Asset(new BitmapFont(Gdx.files.internal(fileName)), fileName, nextId(), type));
+                disposableAssetList.add(new DisposableAsset(new BitmapFont(Gdx.files.internal(fileName)), fileName, nextId(), type));
                 return getLatestItem();
             case TEXTURE_ATLAS:
-                assetList.add(new Asset(new TextureAtlas(Gdx.files.internal(fileName)), fileName, nextId(), type));
+                disposableAssetList.add(new DisposableAsset(new TextureAtlas(Gdx.files.internal(fileName)), fileName, nextId(), type));
                 return getLatestItem();
             case FONT_GENERATOR:
-                assetList.add(new Asset(new FreeTypeFontGenerator(Gdx.files.internal(fileName)), fileName, nextId(), type));
+                disposableAssetList.add(new DisposableAsset(new FreeTypeFontGenerator(Gdx.files.internal(fileName)), fileName, nextId(), type));
                 return getLatestItem();
             default:
                 Gdx.app.log("Assets", "File of type: " + type + " cannot be loaded because it is an invalid type.");
@@ -67,16 +68,16 @@ public class AssetLoader {
         }
     }
     private Disposable getLatestItem() {
-        return assetList.get(assetList.size() - 1).getItem();
+        return disposableAssetList.get(disposableAssetList.size() - 1).getItem();
     }
     public void dispose(String name) {
 
     }
     public void disposeAll() {
-        for(Asset asset: assetList) {
-            asset.getItem().dispose();
+        for(DisposableAsset disposableAsset : disposableAssetList) {
+            disposableAsset.getItem().dispose();
         }
-        assetList.clear();
+        disposableAssetList.clear();
     }
     public enum AssetType {
         TEXTURE,

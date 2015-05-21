@@ -8,7 +8,7 @@ buildscript {
         classpath 'de.richsource.gradle.plugins:gwt-gradle-plugin:0.6'
         classpath 'com.android.tools.build:gradle:1.2.3'
         classpath 'org.robovm:robovm-gradle-plugin:1.2.0'
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.4'
+        classpath "com.neenbedankt.gradle.plugins:android-apt:1.4"
     }
 }
 
@@ -55,6 +55,7 @@ project(":android") {
 
     dependencies {
         compile project(":core")
+        apt "com.squareup.dagger:dagger-compiler:1.2.2"
         compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
@@ -69,9 +70,7 @@ project(":android") {
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile 'javax.annotation:jsr250-api:1.0'
-        compile 'com.google.dagger:dagger:2.0'
-        apt 'com.google.dagger:dagger-compiler:2.0'
+
     }
 }
 
@@ -111,6 +110,7 @@ project(":html") {
 
 project(":core") {
     apply plugin: "java"
+    sourceSets.test.java.srcDirs = ["test/"]
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
@@ -118,7 +118,14 @@ project(":core") {
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx-ai:$aiVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        compile 'com.google.dagger:dagger:2.0'
+        compile "com.squareup.dagger:dagger:1.2.2"
+        compile "com.squareup.dagger:dagger-compiler:1.2.2"
+        testCompile 'junit:junit:4.12'
+        testCompile "org.mockito:mockito-core:1.9.5"
+        testCompile('org.robolectric:robolectric:3.0-rc2') {
+            exclude group: 'commons-logging', module: 'commons-logging'
+            exclude group: 'org.apache.httpcomponents', module: 'httpclient'
+        }
     }
 }
 

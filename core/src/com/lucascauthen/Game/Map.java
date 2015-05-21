@@ -35,7 +35,7 @@ public class Map {
             entity.render();
         }
     }
-    public void update(float delta) {
+    public void act(float delta) {
         for(Entity entity : entities) {
             entity.update(delta);
         }
