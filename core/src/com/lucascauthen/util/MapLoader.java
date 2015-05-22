@@ -10,6 +10,7 @@ import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 /*
 
  */
+    @Deprecated
 public class MapLoader {
     private TiledMap map;
     private static MapLoader instance;

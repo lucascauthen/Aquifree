@@ -4,20 +4,18 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.lucascauthen.Game.Map;
-import com.lucascauthen.Managers.Display.ScreenChanger;
+import com.lucascauthen.Managers.Levels.Map;
 
 /**
  * Created by Administrator on 4/24/2015.
  */
+@Deprecated
 public class PlayScreen extends GameScreen {
     private OrthographicCamera camera = new OrthographicCamera();
     private OrthogonalTiledMapRenderer tiledMapRenderer;
     private Map map;
-    public PlayScreen(ScreenChanger parent) {
-    super(parent);
-    this.map = new Map();
-}
+
+
 
     @Override
     public void resize(int width, int height) {

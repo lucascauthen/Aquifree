@@ -1,4 +1,4 @@
-package com.lucascauthen.Game.Entities;
+package com.lucascauthen.Managers.Levels.Entities;
 
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapProperties;

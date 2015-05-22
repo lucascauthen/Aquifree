@@ -10,7 +10,10 @@ import com.lucascauthen.Displays.BaseDisplays.StageDisplay;
 import com.lucascauthen.Displays.BaseDisplays.TransitionableScreen;
 import com.lucascauthen.Displays.BaseDisplays.UiScreen;
 import com.lucascauthen.Displays.Screens.MenuItems.MenuButton;
-import com.lucascauthen.Modules.Injector;
+import com.lucascauthen.Managers.Assets.AssetManager;
+import com.lucascauthen.Managers.Levels.LevelManager;
+import com.lucascauthen.Managers.Sound.SoundManager;
+import com.lucascauthen.Managers.States.StateManager;
 
 import javax.inject.Inject;
 
@@ -31,8 +34,8 @@ public class MainMenuScreen extends TransitionableScreen implements UiScreen {
     Texture backgroundTexture;
     Table backgroundContents;
 
-    public MainMenuScreen() {
-        Injector.getInstance().inject(this);
+    public MainMenuScreen(StateManager stateManager, AssetManager assetManager, LevelManager levelManager, SoundManager soundManager) {
+        super(stateManager, assetManager, levelManager, soundManager);
     }
 
 

@@ -1,6 +1,7 @@
 package com.lucascauthen.Displays.Screens.MenuItems;
 
-import com.lucascauthen.util.AssetLoader;
+import com.lucascauthen.Managers.Assets.AssetManager;
+
 
 import javax.inject.Inject;
 
@@ -9,12 +10,10 @@ import javax.inject.Inject;
  * Created by XPS on 5/14/2015.
  */
 public abstract class MenuItem {
-    @Inject
-    public AssetLoader assetLoader;
     public abstract void dispose();
     //ObjectGraph objectGraph = ObjectGraph.create(new AssetLoaderModule());
-
-    public MenuItem() {
-        this.assetLoader= new AssetLoader();
+    private final AssetManager assetManager;
+    public MenuItem(AssetManager assetManager) {
+        this.assetManager = assetManager;
     }
 }

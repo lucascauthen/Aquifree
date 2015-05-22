@@ -7,6 +7,7 @@ import com.lucascauthen.Displays.BaseDisplays.MapDisplay;
 import com.lucascauthen.Displays.BaseDisplays.StageDisplay;
 import com.lucascauthen.Displays.BaseDisplays.UiScreen;
 import com.lucascauthen.Managers.Levels.LevelManager;
+import com.lucascauthen.Managers.Sound.SoundManager;
 import com.lucascauthen.Managers.States.StateManager;
 import com.lucascauthen.Modules.Injector;
 
@@ -23,11 +24,10 @@ public class LevelScreen extends TransitionableScreen implements UiScreen{
     private boolean isLodaed = false;
     private int mapIndex;
 
-
-    public LevelScreen(AssetManager assetManager, StateManager stateManager, LevelManager levelManager) {
-        super(assetManager, stateManager, levelManager);
-        Injector.getInstance().inject(this);
+    public LevelScreen(StateManager stateManager, AssetManager assetManager, LevelManager levelManager, SoundManager soundManager) {
+        super(stateManager, assetManager, levelManager, soundManager);
     }
+
 
     public void loadMap(String mapTitle) {
         this.mapDisplay.loadMap(mapTitle);

@@ -11,7 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class StageDisplay implements Screen {
     private boolean isVisible = true;
     private boolean isPaused = false;
-    public Stage stage = new Stage();
+    public final Stage stage = new Stage();
 
     public boolean isVisible() {
         return isVisible;
@@ -19,6 +19,9 @@ public class StageDisplay implements Screen {
 
     public boolean isPaused() {
         return isPaused;
+    }
+    public StageDisplay() {
+
     }
 
     @Override
@@ -29,10 +32,10 @@ public class StageDisplay implements Screen {
 
     @Override
     public void render(float delta) {
-        while(!isPaused) {
+        if (!isPaused) {
             stage.act();
         }
-        while(isVisible) {
+        if(isVisible) {
             stage.draw();
         }
     }
@@ -44,12 +47,12 @@ public class StageDisplay implements Screen {
 
     @Override
     public void pause() {
-        isPaused = false;
+        isPaused = true;
     }
 
     @Override
     public void resume() {
-        isPaused = true;
+        isPaused = false;
     }
 
     @Override

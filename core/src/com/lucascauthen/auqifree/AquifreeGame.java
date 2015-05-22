@@ -1,13 +1,11 @@
 package com.lucascauthen.auqifree;
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.lucascauthen.Managers.Display.ScreenManager;
 import com.lucascauthen.Managers.States.StateManager;
 import com.lucascauthen.Modules.Injector;
-import com.lucascauthen.util.AssetLoader;
 
 import javax.inject.Inject;
 
@@ -15,9 +13,10 @@ import javax.inject.Inject;
 public class AquifreeGame extends ApplicationAdapter {
 
     @Inject
-    public ScreenManager screenManager;
-    @Inject
     public StateManager stateManager;
+    @Inject
+    public ScreenManager screenManager;
+
 
 	@Override
 	public void create () {

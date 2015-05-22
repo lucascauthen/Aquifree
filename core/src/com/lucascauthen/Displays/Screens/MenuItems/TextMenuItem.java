@@ -3,6 +3,7 @@ package com.lucascauthen.Displays.Screens.MenuItems;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.lucascauthen.Managers.Assets.AssetManager;
 
 /**
  * Created by XPS on 5/14/2015.
@@ -13,6 +14,12 @@ public abstract class TextMenuItem extends MenuItem{
     protected FreeTypeFontGenerator fontGenerator;
     protected FreeTypeFontGenerator.FreeTypeFontParameter parameters = new FreeTypeFontGenerator.FreeTypeFontParameter();
     protected String text;
+    public TextMenuItem(AssetManager assetManager, String text, String fontFile, Color color, int fontSize) {
+        super(assetManager);
+        this.setFontColor(color);
+        this.setFontSize(fontSize);
+        this.setText(text);
+    }
     public void setText(String text) {
         this.text = text;
     }
@@ -47,9 +54,5 @@ public abstract class TextMenuItem extends MenuItem{
     public void dispose() {
         font.dispose();
     }
-    public TextMenuItem(String text, String fontFile, Color color, int fontSize) {
-        this.setFontColor(color);
-        this.setFontSize(fontSize);
-        this.setText(text);
-    }
+
 }

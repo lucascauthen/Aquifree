@@ -7,6 +7,7 @@ import com.lucascauthen.Managers.Assets.AssetManager;
 import com.lucascauthen.Managers.Display.ScreenManager;
 import com.lucascauthen.Managers.Input.InputManager;
 import com.lucascauthen.Managers.Levels.LevelManager;
+import com.lucascauthen.Managers.Sound.SoundManager;
 import com.lucascauthen.Managers.States.StateManager;
 
 import javax.inject.Inject;
@@ -16,16 +17,18 @@ import javax.inject.Inject;
  * Created by Administrator on 5/21/2015.
  */
 public abstract class TransitionableScreen implements Screen {
-    private final AssetManager assetManager;
-    private final StateManager stateManager;
-    private final LevelManager levelManager;
+    protected final AssetManager assetManager;
+    protected final StateManager stateManager;
+    protected final LevelManager levelManager;
+    protected final SoundManager soundManager;
 
     public abstract SpriteBatch getSnapShot();
 
-    public TransitionableScreen(AssetManager assetManager, StateManager stateManager, LevelManager levelManager) {
+    public TransitionableScreen(StateManager stateManager, AssetManager assetManager, LevelManager levelManager, SoundManager soundManager) {
         this.assetManager = assetManager;
         this.stateManager = stateManager;
         this.levelManager = levelManager;
+        this.soundManager = soundManager;
     }
 
     @Override

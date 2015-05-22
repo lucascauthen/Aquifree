@@ -1,7 +1,6 @@
 package com.lucascauthen.Managers.Assets;
 
 import com.badlogic.gdx.utils.Disposable;
-import com.lucascauthen.util.AssetLoader;
 
 /**
  * Created by XPS on 4/12/2015.
@@ -22,15 +21,15 @@ public class DisposableAsset {
         return id;
     }
 
-    public AssetLoader.AssetType getType() {
+    public AssetEnum getType() {
         return type;
     }
 
-    private AssetLoader.AssetType type;
+    private AssetEnum type;
     private Disposable item;
     private String name;
     private int id;
-    public DisposableAsset(Disposable item, String name, int id, AssetLoader.AssetType type) {
+    public DisposableAsset(Disposable item, String name, int id, AssetEnum type) {
         this.item = item;
         this.name = name;
         this.id = id;

@@ -9,6 +9,8 @@ import com.lucascauthen.Managers.Levels.LevelManager;
 import com.lucascauthen.Managers.Sound.SoundManager;
 import com.lucascauthen.Managers.States.StateManager;
 import com.lucascauthen.auqifree.AquifreeGame;
+import com.lucascauthen.util.Tester;
+
 
 import javax.inject.Singleton;
 
@@ -20,7 +22,8 @@ import dagger.Provides;
  */
 @Module (
         injects = {
-                AquifreeGame.class
+                AquifreeGame.class,
+                Tester.class
         }
 )
 public class ManagerModule extends  Object{
@@ -31,8 +34,8 @@ public class ManagerModule extends  Object{
     }
     @Provides
     @Singleton
-    public ScreenManager provideScreenManager(InputManager inputManager, AssetManager assetManager, StateManager stateManager, LevelManager levelManager) {
-        return new ScreenManager(inputManager, assetManager, stateManager, levelManager);
+    public ScreenManager provideScreenManager(AssetManager assetManager, LevelManager levelManager, SoundManager soundManager) {
+        return new ScreenManager(assetManager, levelManager, soundManager);
     }
     @Provides
     @Singleton
@@ -43,5 +46,16 @@ public class ManagerModule extends  Object{
     @Singleton
     public SoundManager provideSoundManager() {
         return new SoundManager();
+    }
+
+    @Provides
+    @Singleton
+    public StateManager provideStateManager(ScreenManager screenManager, SoundManager soundManager, LevelManager levelManager, InputManager inputManager) {
+        return new StateManager(screenManager, soundManager, levelManager, inputManager);
+    }
+    @Provides
+    @Singleton
+    public LevelManager provideLevelManager() {
+        return new LevelManager();
     }
 }

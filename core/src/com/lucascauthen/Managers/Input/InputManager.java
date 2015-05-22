@@ -1,5 +1,7 @@
 package com.lucascauthen.Managers.Input;
 
+import com.lucascauthen.Managers.States.StateManager;
+
 import javax.inject.Inject;
 
 /**
@@ -8,4 +10,7 @@ import javax.inject.Inject;
 
 public class InputManager {
 
+    public InputManager() {
+
+    }
 }

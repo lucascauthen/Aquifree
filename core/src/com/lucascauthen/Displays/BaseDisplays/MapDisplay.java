@@ -4,7 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
-import com.lucascauthen.Game.Map;
+import com.lucascauthen.Managers.Levels.Map;
 
 /**
  * Created by Administrator on 5/20/2015.
@@ -16,7 +16,10 @@ public class MapDisplay implements Screen {
     private boolean isVisible = true;
     private boolean isPaused = false;
     private boolean isLoaded = false;
-    public MapDisplay() {}
+    public MapDisplay() {
+        map = new Map();
+        isLoaded = true;
+    }
     public MapDisplay(String mapName) {
         loadMap(mapName);
         isLoaded = true;
@@ -33,10 +36,10 @@ public class MapDisplay implements Screen {
     @Override
     public void render(float delta) {
         if(isLoaded && map != null) {
-            while (!isPaused) {
+            if (!isPaused) {
                 map.act(delta);
             }
-            while (isVisible) {
+            if (isVisible) {
                 map.render();
             }
         } else {

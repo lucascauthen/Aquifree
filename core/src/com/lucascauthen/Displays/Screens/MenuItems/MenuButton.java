@@ -3,7 +3,8 @@ package com.lucascauthen.Displays.Screens.MenuItems;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.lucascauthen.util.AssetLoader;
+import com.lucascauthen.Managers.Assets.AssetEnum;
+import com.lucascauthen.Managers.Assets.AssetManager;
 
 /*
     IMPORTANT:
@@ -25,8 +26,9 @@ public class MenuButton extends MenuItem{
     private Button.ButtonStyle style;
     private TextureAtlas atlas;
     private float scale = 1;
-    public MenuButton(String imgAtlasFile) {
-        atlas = (TextureAtlas)assetLoader.getAsset(imgAtlasFile, AssetLoader.AssetType.TEXTURE_ATLAS);
+    public MenuButton(AssetManager assetManager, String imgAtlasFile) {
+        super(assetManager);
+        atlas = (TextureAtlas)assetManager.getAsset(imgAtlasFile, AssetEnum.TEXTURE_ATLAS);
         skin = new Skin();
         skin.addRegions(atlas);
         imgAtlasFile = imgAtlasFile.substring(imgAtlasFile.lastIndexOf('/') + 1, imgAtlasFile.lastIndexOf('.'));
